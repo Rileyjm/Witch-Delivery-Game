@@ -4,7 +4,7 @@ var speed = 0
 @export var walk = 300
 @export var sprintSpeed = 450
 const maxSpeed =450
-const  friction = 700
+const  friction = 750
 const accl = 1600
 
 var input = Vector2.ZERO
