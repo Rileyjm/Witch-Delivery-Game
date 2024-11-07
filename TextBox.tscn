@@ -381,6 +381,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 size_flags_stretch_ratio = 4.75
 theme_override_colors/font_color = Color(0.94, 0.3478, 0.35767, 1)
+text = "dsf"
 
 [node name="text" type="Label" parent="TextboxContainer/MarginContainer/HBoxContainer"]
 texture_filter = 3

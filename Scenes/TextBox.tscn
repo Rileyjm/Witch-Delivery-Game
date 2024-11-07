@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dw01u6uokr2g7"]
 
 [ext_resource type="Script" path="res://Scripts/text_box.gd" id="1_w4y4a"]
-[ext_resource type="FontFile" uid="uid://cuf51tbjyy1l4" path="res://Assets/Peaberry-Font-v2.0/Peaberry-Font-v2.0/Peaberry Font Family/Peaberry Monospace/Peaberry-Mono.otf" id="2_06er8"]
+[ext_resource type="FontFile" uid="uid://dk2rsye3q5go7" path="res://Assets/Peaberry-Font-v2.0/Peaberry-Font-v2.0/Peaberry Font Family/Peaberry Base/Peaberry-Base.otf" id="2_kuqwx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tr3gj"]
 bg_color = Color(0.052015, 0.0933763, 0.219722, 1)
@@ -56,7 +56,7 @@ size_flags_stretch_ratio = 4.75
 theme = SubResource("Theme_wkash")
 theme_type_variation = &"HeaderMedium"
 theme_override_colors/font_color = Color(0.94, 0.3478, 0.35767, 1)
-theme_override_fonts/font = ExtResource("2_06er8")
+theme_override_fonts/font = ExtResource("2_kuqwx")
 theme_override_font_sizes/font_size = 58
 text = "*"
 
@@ -70,7 +70,7 @@ size_flags_stretch_ratio = 95.95
 theme = SubResource("Theme_wkash")
 theme_type_variation = &"HeaderMedium"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_06er8")
+theme_override_fonts/font = ExtResource("2_kuqwx")
 theme_override_font_sizes/font_size = 55
 visible_characters = 0
 visible_ratio = 0.0
@@ -83,6 +83,6 @@ size_flags_vertical = 8
 theme = SubResource("Theme_wkash")
 theme_type_variation = &"HeaderMedium"
 theme_override_colors/font_color = Color(0.94, 0.3478, 0.35767, 1)
-theme_override_fonts/font = ExtResource("2_06er8")
+theme_override_fonts/font = ExtResource("2_kuqwx")
 theme_override_font_sizes/font_size = 58
 text = "v"
