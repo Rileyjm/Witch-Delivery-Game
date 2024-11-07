@@ -7,7 +7,7 @@ const tRate = 0.9
 @onready var text = $TextboxContainer/MarginContainer/HBoxContainer/text
 
 func _ready():
-	add_text("text being adde
+	add_text("text bfde
 	
 	ah")
 
