@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw01u6uokr2g7"]
+
+[ext_resource type="Script" path="res://Scripts/text_box.gd" id="1_w4y4a"]
+[ext_resource type="FontFile" uid="uid://cuf51tbjyy1l4" path="res://Assets/Peaberry-Font-v2.0/Peaberry-Font-v2.0/Peaberry Font Family/Peaberry Monospace/Peaberry-Mono.otf" id="2_06er8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tr3gj"]
+bg_color = Color(0.052015, 0.0933763, 0.219722, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.704759, 0.766615, 0.872121, 1)
+corner_detail = 20
+
+[sub_resource type="Theme" id="Theme_wkash"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_w4y4a")
+
+[node name="TextboxContainer" type="MarginContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -533.0
+offset_top = -237.0
+offset_right = 528.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Panel" type="Panel" parent="TextboxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tr3gj")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextboxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextboxContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Start" type="Label" parent="TextboxContainer/MarginContainer/HBoxContainer"]
+texture_filter = 3
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+size_flags_stretch_ratio = 4.75
+theme = SubResource("Theme_wkash")
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(0.94, 0.3478, 0.35767, 1)
+theme_override_fonts/font = ExtResource("2_06er8")
+theme_override_font_sizes/font_size = 58
+text = "*"
+
+[node name="text" type="Label" parent="TextboxContainer/MarginContainer/HBoxContainer"]
+texture_filter = 3
+custom_minimum_size = Vector2(0.705, 5.57)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 95.95
+theme = SubResource("Theme_wkash")
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_06er8")
+theme_override_font_sizes/font_size = 55
+text = "this is test text"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="end" type="Label" parent="TextboxContainer/MarginContainer/HBoxContainer"]
+texture_filter = 3
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = SubResource("Theme_wkash")
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(0.94, 0.3478, 0.35767, 1)
+theme_override_fonts/font = ExtResource("2_06er8")
+theme_override_font_sizes/font_size = 58
+text = "v"
