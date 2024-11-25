@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://c8xo03je4gobn"]
+[gd_scene load_steps=27 format=4 uid="uid://c8xo03je4gobn"]
 
 [ext_resource type="Texture2D" uid="uid://cn81xkisees4m" path="res://Assets/TileSets/TileSet_V1.png" id="1_catf3"]
 [ext_resource type="Texture2D" uid="uid://cqw6rgnk12wdx" path="res://Assets/TileSets/all.png" id="1_ewsce"]
@@ -6,8 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://b4p0gyl4mv8nm" path="res://Assets/TileSets/buildings.png" id="2_jrv1g"]
 [ext_resource type="PackedScene" uid="uid://cdo40f4qphovy" path="res://Player.tscn" id="2_s8gas"]
 [ext_resource type="Texture2D" uid="uid://cxfuc1gxbnkgu" path="res://Assets/TileSets/TileSet_V2.png" id="4_va7wi"]
+[ext_resource type="PackedScene" uid="uid://d3asrb7vh4ua5" path="res://Assets/Charcter/Vampire.tscn" id="7_wuthm"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4xjdx"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fwdk6"]
 texture = ExtResource("1_f0hoh")
 0:1/size_in_atlas = Vector2i(1, 2)
 0:1/0 = 0
@@ -19,7 +20,7 @@ texture = ExtResource("1_f0hoh")
 3:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_q4qig"]
-sources/0 = SubResource("TileSetAtlasSource_4xjdx")
+sources/0 = SubResource("TileSetAtlasSource_fwdk6")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xgpsx"]
 texture = ExtResource("1_ewsce")
@@ -78,9 +79,6 @@ texture = ExtResource("1_ewsce")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dy3pk"]
 texture = ExtResource("2_jrv1g")
-0:0/size_in_atlas = Vector2i(5, 6)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-25.5, 23, -20.75, 14.25, -7.75, 14, 4.75, 14.5, 16.75, 14, 28.5, 13, 36.25, 21.25, 36, 37.25, 6, 40.5, -8.75, 37.25, -25.75, 37.5)
 6:2/size_in_atlas = Vector2i(4, 4)
 6:2/0 = 0
 6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-21, 5.25, -2.25, 2.25, 18.25, 3.25, 19, 20.75, -4.25, 21, -6.25, 27.5, -20, 26.75, -19, 14.5)
@@ -97,6 +95,8 @@ texture = ExtResource("2_jrv1g")
 22:2/size_in_atlas = Vector2i(3, 4)
 22:2/0 = 0
 22:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-14.5, -1.25, -4.25, -1.25, 8, -1.25, 8.25, 22.25, -1.75, 22.25, -7.5, 20.5, -14.5, 20.75, -15.75, 12.75, -15.25, 8)
+0:0/size_in_atlas = Vector2i(5, 6)
+0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_5jvt5"]
 physics_layer_0/collision_layer = 1
@@ -1701,3 +1701,8 @@ position = Vector2(2385, 185.875)
 rotation = 1.5708
 scale = Vector2(1.275, 1.275)
 shape = SubResource("RectangleShape2D_fchga")
+
+[node name="Vampire" parent="." instance=ExtResource("7_wuthm")]
+z_index = 2
+position = Vector2(1482, 64)
+scale = Vector2(2.5, 2.5)
