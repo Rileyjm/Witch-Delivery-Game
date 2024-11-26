@@ -7825,8 +7825,8 @@ tile_set = SubResource("TileSet_1181r")
 z_index = 2
 position = Vector2(-118, 611)
 scale = Vector2(1.2, 1.2)
-walk = 200
-sprintSpeed = 350
+walk = 180
+sprintSpeed = 320
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 scale = Vector2(1.00052, 0.999245)
