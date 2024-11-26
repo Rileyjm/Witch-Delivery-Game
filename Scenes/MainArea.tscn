@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=4 uid="uid://c8xo03je4gobn"]
+[gd_scene load_steps=30 format=4 uid="uid://c8xo03je4gobn"]
 
 [ext_resource type="Texture2D" uid="uid://cn81xkisees4m" path="res://Assets/TileSets/TileSet_V1.png" id="1_catf3"]
 [ext_resource type="Texture2D" uid="uid://cqw6rgnk12wdx" path="res://Assets/TileSets/all.png" id="1_ewsce"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_f0hoh"]
+[ext_resource type="Script" path="res://Scripts/main_area.gd" id="1_jlfal"]
 [ext_resource type="Texture2D" uid="uid://b4p0gyl4mv8nm" path="res://Assets/TileSets/buildings.png" id="2_jrv1g"]
 [ext_resource type="PackedScene" uid="uid://cdo40f4qphovy" path="res://Player.tscn" id="2_s8gas"]
 [ext_resource type="Texture2D" uid="uid://cxfuc1gxbnkgu" path="res://Assets/TileSets/TileSet_V2.png" id="4_va7wi"]
@@ -1592,7 +1593,7 @@ size = Vector2(3185.39, 49.2156)
 size = Vector2(1354.76, 49.2156)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qurn2"]
-size = Vector2(633.237, 66.9608)
+size = Vector2(633.237, 52.5981)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82adk"]
 size = Vector2(1745.1, 66.9608)
@@ -1612,7 +1613,14 @@ size = Vector2(111.961, 66.9608)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fchga"]
 size = Vector2(1529.22, 66.9608)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bi4mj"]
+size = Vector2(179, 84)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1h8x"]
+size = Vector2(360, 157)
+
 [node name="MainArea" type="Node2D"]
+script = ExtResource("1_jlfal")
 
 [node name="TileMapLayer3" type="TileMapLayer" parent="."]
 visibility_layer = 7
@@ -1664,7 +1672,7 @@ scale = Vector2(1.275, 1.275)
 shape = SubResource("RectangleShape2D_hqi3j")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-961.311, -761.375)
+position = Vector2(-961.311, -770.531)
 scale = Vector2(1.275, 1.275)
 shape = SubResource("RectangleShape2D_qurn2")
 
@@ -1706,3 +1714,18 @@ shape = SubResource("RectangleShape2D_fchga")
 z_index = 2
 position = Vector2(1482, 64)
 scale = Vector2(2.5, 2.5)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="MountainPath" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-501, -779)
+shape = SubResource("RectangleShape2D_bi4mj")
+
+[node name="forestPath" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="forestPath"]
+position = Vector2(-1187, 998)
+shape = SubResource("RectangleShape2D_x1h8x")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="forestPath" to="." method="_on_forest_path_body_entered"]
