@@ -2,6 +2,7 @@ extends Node
 
 var current_scene = "world"
 var transition_scene = false
+var vampDia = 1
 
 func finish_changescenes():
 	if transition_scene == true:

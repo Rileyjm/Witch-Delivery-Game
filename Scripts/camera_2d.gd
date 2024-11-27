@@ -2,9 +2,9 @@ extends Camera2D
 
 # Dictionary mapping scene names to zoom levels
 var scene_zoom_levels = {
-	"world": Vector2(1.2, 1),
+	"world": Vector2(1.2, 1.2),
 	"mountains": Vector2(2, 2),
-	"res://scenes/Scene3.tscn": Vector2(2, 2)
+	"forest": Vector2(1, 1)
 }
 
 func _ready() -> void:
