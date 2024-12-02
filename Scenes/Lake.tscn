@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=4 uid="uid://cji4lnqwsi2j1"]
 
-[ext_resource type="Script" path="res://Scenes/lake.gd" id="1_gjw3p"]
+[ext_resource type="Script" path="res://Scripts/lake.gd" id="1_gjw3p"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_wxirp"]
 [ext_resource type="Texture2D" uid="uid://xjxm1svr3as" path="res://Assets/Flowers/ancient-ashspring.png" id="2_m0t6b"]
 [ext_resource type="Texture2D" uid="uid://bcufoifshx2d0" path="res://Assets/Flowers/chaos-flower.png" id="3_2yjpk"]

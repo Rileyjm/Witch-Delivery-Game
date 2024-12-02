@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8ysksq7ap7fr"]
+
+[ext_resource type="Texture2D" uid="uid://dlhoh7ifx8nwt" path="res://Assets/CharcterSprites/mermaididle.png" id="1_d52a3"]
+
+[sub_resource type="Animation" id="Animation_7mb43"]
+resource_name = "idle"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_5sayc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2u0k8"]
+_data = {
+"RESET": SubResource("Animation_5sayc"),
+"idle": SubResource("Animation_7mb43")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qbw3s"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jbf5s"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5ekgr"]
+states/idle/node = SubResource("AnimationNodeAnimation_qbw3s")
+states/idle/position = Vector2(406, 54)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_jbf5s")]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_815jc"]
+size = Vector2(56, 35)
+
+[node name="Mermaid" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_d52a3")
+hframes = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2u0k8")
+}
+speed_scale = 0.6
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_5ekgr")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(7, 3)
+shape = SubResource("RectangleShape2D_815jc")

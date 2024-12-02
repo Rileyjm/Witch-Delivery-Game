@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://tll1uuhe2ysh"]
+
+[ext_resource type="Script" path="res://Scenes/pause.gd" id="1_lglra"]
+[ext_resource type="Texture2D" uid="uid://7rp05ria16ac" path="res://Assets/UI/Buttons/Button_Blue_3Slides.png" id="2_5b042"]
+[ext_resource type="FontFile" uid="uid://dk2rsye3q5go7" path="res://Assets/Peaberry-Font-v2.0/Peaberry-Font-v2.0/Peaberry Font Family/Peaberry Base/Peaberry-Base.otf" id="2_vf1f3"]
+[ext_resource type="Texture2D" uid="uid://ioiffkqf3632" path="res://Assets/UI/Banners/Carved_9Slides.png" id="4_73lnl"]
+[ext_resource type="Texture2D" uid="uid://bh81kiqqhpsru" path="res://Assets/UI/Buttons/Button_Red_3Slides.png" id="5_t5ytp"]
+
+[node name="Pause" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.3
+offset_right = 0.300049
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lglra")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 68.42
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_stretch_ratio = 2.95
+theme_override_constants/separation = 27
+
+[node name="resume" type="Button" parent="MarginContainer/VBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 2
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vf1f3")
+text = "Resume"
+flat = true
+icon_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/VBoxContainer/resume"]
+z_index = -1
+position = Vector2(33, 16)
+scale = Vector2(0.546875, 0.546875)
+texture = ExtResource("2_5b042")
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+position = Vector2(33.7, 42)
+scale = Vector2(0.71875, 0.71875)
+texture = ExtResource("4_73lnl")
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 9
+texture_filter = 1
+layout_direction = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vf1f3")
+text = "Quit"
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/VBoxContainer/Quit"]
+z_index = -1
+position = Vector2(31.7, 15)
+scale = Vector2(0.539062, 0.539062)
+texture = ExtResource("5_t5ytp")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/resume" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

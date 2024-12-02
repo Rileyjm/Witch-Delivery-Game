@@ -26,10 +26,22 @@ directories/dch_directory={
 "unit_test_character": "res://Assets/Tests/Resources/unit_test_character.dch"
 }
 directories/dtl_directory={
+"Bloodlily": "res://addons/dialogic/Bloodlily.dtl",
+"Daisy": "res://addons/dialogic/Daisy.dtl",
 "Goblin": "res://addons/dialogic/Goblin.dtl",
 "GoblinD": "res://addons/dialogic/GoblinD.dtl",
+"GoblinP": "res://addons/dialogic/GoblinP.dtl",
 "VampD": "res://addons/dialogic/VampD.dtl",
-"Vampire": "res://addons/dialogic/Vampire.dtl"
+"VampP": "res://addons/dialogic/VampP.dtl",
+"Vampire": "res://addons/dialogic/Vampire.dtl",
+"bloodroot": "res://addons/dialogic/bloodroot.dtl",
+"cloudberries": "res://addons/dialogic/cloudberries.dtl",
+"fairy": "res://addons/dialogic/fairy.dtl",
+"fairyD": "res://addons/dialogic/fairyD.dtl",
+"fairyP": "res://addons/dialogic/fairyP.dtl",
+"m": "res://addons/dialogic/m.dtl",
+"mD": "res://addons/dialogic/mD.dtl",
+"mP": "res://addons/dialogic/mP.dtl"
 }
 glossary/default_case_sensitive=true
 layout/style_list=["res://addons/dialogic/New_File.tres"]
@@ -106,5 +118,10 @@ dialogic_default_action={
 talk={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)
+]
+}
+pause={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }

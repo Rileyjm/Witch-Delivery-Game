@@ -10,7 +10,7 @@ var distance_to_enemy: float = 0.0
 
 
 func _physics_process(delta: float) -> void:
-	if playerChase:
+	if playerChase && distance_to_enemy>70:
 		position += (player.position - position).normalized() * speed * delta
 		move_and_collide(Vector2(0,0))
 		var direction = (player.position - position).normalized() 
@@ -18,11 +18,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 	is_walking()
-	spriteFlip()	
+	spriteFlip()
+	isAttacking()
 	
 	if play:
 		distance_to_enemy = global_position.distance_to(play.global_position)
-		print("Distance to enemy: ", distance_to_enemy)
+		#print("Distance to enemy: ", distance_to_enemy)
 		
 
 
@@ -48,5 +49,17 @@ func is_walking():
 func spriteFlip():
 	if velocity.x >0:
 		$Sprite2D.flip_h = false
-	else:
+	if velocity.x < 0:
 		$Sprite2D.flip_h = true
+	else:
+			pass
+func isAttacking():
+	if distance_to_enemy < 75:
+		$Sprite2D/AnimationTree.set("parameters/conditions/isAttacking",true)
+		$Sprite2D/AnimationTree.set("parameters/conditions/isNotAttacking",false)
+	else:
+		$Sprite2D/AnimationTree.set("parameters/conditions/isNotAttacking",true)
+		$Sprite2D/AnimationTree.set("parameters/conditions/isAttacking",false)
+		
+func pawnB():
+	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://c8xo03je4gobn"]
+[gd_scene load_steps=48 format=4 uid="uid://c8xo03je4gobn"]
 
 [ext_resource type="Texture2D" uid="uid://cn81xkisees4m" path="res://Assets/TileSets/TileSet_V1.png" id="1_catf3"]
 [ext_resource type="Texture2D" uid="uid://cqw6rgnk12wdx" path="res://Assets/TileSets/all.png" id="1_ewsce"]
@@ -14,6 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://btxmhbikyt4jp" path="res://Assets/Charcter/pawn.tscn" id="10_nl3j3"]
 [ext_resource type="Script" path="res://Assets/Charcter/goblin.gd" id="11_ay17k"]
 [ext_resource type="PackedScene" uid="uid://bs65vl0j2ej3d" path="res://Assets/Charcter/Goblin.tscn" id="12_4mlwd"]
+[ext_resource type="PackedScene" uid="uid://o6mig15ycr5h" path="res://Assets/Charcter/fairy.tscn" id="15_7uw7v"]
+[ext_resource type="Script" path="res://Assets/Charcter/fairy.gd" id="16_46pad"]
+[ext_resource type="PackedScene" uid="uid://c8ysksq7ap7fr" path="res://Assets/Charcter/mermaid.tscn" id="17_3kjkq"]
+[ext_resource type="Script" path="res://Assets/Charcter/mermaid.gd" id="18_p6gsf"]
+[ext_resource type="PackedScene" uid="uid://cmnhghv2x7auv" path="res://Assets/Charcter/Werewolf.tscn" id="19_ayit4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bh8bq"]
 size = Vector2(3185.39, 49.2156)
@@ -1654,8 +1659,14 @@ radius = 49.8854
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_foid7"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jbdlg"]
+radius = 71.0158
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vkr5g"]
 size = Vector2(80, 318)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_so44u"]
+radius = 63.6201
 
 [node name="MainArea" type="Node2D"]
 script = ExtResource("1_jlfal")
@@ -1829,7 +1840,7 @@ play = NodePath("../../Player")
 [node name="NPCs" type="Node2D" parent="."]
 
 [node name="Goblin" parent="NPCs" instance=ExtResource("12_4mlwd")]
-z_index = 2
+z_index = 3
 position = Vector2(1572, 871)
 scale = Vector2(3, 3)
 script = ExtResource("11_ay17k")
@@ -1847,11 +1858,21 @@ script = ExtResource("4_e83bt")
 
 [node name="chatDetection" type="Area2D" parent="NPCs/Vampire"]
 position = Vector2(-0.800049, 0)
-scale = Vector2(1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/Vampire/chatDetection"]
 scale = Vector2(5.645, 5.645)
 shape = SubResource("CircleShape2D_foid7")
+
+[node name="Fairy" parent="NPCs" instance=ExtResource("15_7uw7v")]
+z_index = 5
+position = Vector2(-306, 877)
+scale = Vector2(2, 2)
+script = ExtResource("16_46pad")
+
+[node name="fChat" type="Area2D" parent="NPCs/Fairy"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/Fairy/fChat"]
+shape = SubResource("CircleShape2D_jbdlg")
 
 [node name="lakePath" type="Area2D" parent="."]
 
@@ -1859,10 +1880,30 @@ shape = SubResource("CircleShape2D_foid7")
 position = Vector2(2391, 1239)
 shape = SubResource("RectangleShape2D_vkr5g")
 
+[node name="Mermaid" parent="." instance=ExtResource("17_3kjkq")]
+position = Vector2(1123, 1538)
+scale = Vector2(2.5, 2.5)
+script = ExtResource("18_p6gsf")
+
+[node name="mTalk" type="Area2D" parent="Mermaid"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mermaid/mTalk"]
+position = Vector2(-8.8, 8)
+shape = SubResource("CircleShape2D_so44u")
+
+[node name="Werewolf" parent="Mermaid" instance=ExtResource("19_ayit4")]
+z_index = 3
+position = Vector2(-462.8, -620)
+scale = Vector2(1.3, 1.3)
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="forestPath" to="." method="_on_forest_path_body_entered"]
 [connection signal="body_entered" from="NPCs/Goblin/chatDetGob" to="NPCs/Goblin" method="_on_chat_det_gob_body_entered"]
 [connection signal="body_exited" from="NPCs/Goblin/chatDetGob" to="NPCs/Goblin" method="_on_chat_det_gob_body_exited"]
 [connection signal="body_entered" from="NPCs/Vampire/chatDetection" to="NPCs/Vampire" method="_on_chat_detection_body_entered"]
 [connection signal="body_exited" from="NPCs/Vampire/chatDetection" to="NPCs/Vampire" method="_on_chat_detection_body_exited"]
+[connection signal="body_entered" from="NPCs/Fairy/fChat" to="NPCs/Fairy" method="_on_f_chat_body_entered"]
+[connection signal="body_exited" from="NPCs/Fairy/fChat" to="NPCs/Fairy" method="_on_f_chat_body_exited"]
 [connection signal="body_entered" from="lakePath" to="." method="_on_lake_path_body_entered"]
+[connection signal="body_entered" from="Mermaid/mTalk" to="Mermaid" method="_on_m_talk_body_entered"]
+[connection signal="body_exited" from="Mermaid/mTalk" to="Mermaid" method="_on_m_talk_body_exited"]

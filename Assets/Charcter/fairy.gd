@@ -9,22 +9,20 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if playerInArea :
-		if Input.is_action_just_pressed("talk") && Global.vampDia == 1:
-			run_dialogue("Vampire")
-			Global.vampDia=2
-		if Input.is_action_just_pressed("talk") && Global.vampDia == 2:
-			run_dialogue("VampD")
-		if Input.is_action_just_pressed("talk") && Global.vampDia == 3:
-			run_dialogue("VampP")
-			
-			
-	Global.diaCheck()
-func _on_chat_detection_body_entered(body: Node2D) -> void:
+		if Input.is_action_just_pressed("talk") && Global.fairyDia == 1:
+			run_dialogue("fairy")
+			Global.fairyDia=2
+		if Input.is_action_just_pressed("talk") && Global.fairyDia == 2:
+			run_dialogue("fairyD")
+		if Input.is_action_just_pressed("talk") && Global.fairyDia == 3:
+			run_dialogue("fairyP")
+
+func _on_f_chat_body_entered(body: Node2D) -> void:
 	if body.has_method("player"):
 		playerInArea = true
 
 
-func _on_chat_detection_body_exited(body: Node2D) -> void:
+func _on_f_chat_body_exited(body: Node2D) -> void:
 	if body.has_method("player"):
 		playerInArea = false
 func run_dialogue(dialogue_string):
