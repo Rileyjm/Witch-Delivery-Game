@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnntw43mbb2ew"]
+
+[ext_resource type="Texture2D" uid="uid://da3wsou0g1g7f" path="res://Assets/Flowers/bloodroot.png" id="1_vtwka"]
+[ext_resource type="Script" path="res://Scenes/blood_root.gd" id="2_0pjg0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qvuol"]
+radius = 65.6201
+
+[node name="BloodRoot" type="Sprite2D"]
+z_index = 1
+texture_filter = 1
+position = Vector2(169, -524)
+scale = Vector2(2.65385, 2.65385)
+texture = ExtResource("1_vtwka")
+script = ExtResource("2_0pjg0")
+
+[node name="BloodRoot" type="Area2D" parent="."]
+z_index = 2
+position = Vector2(-511.333, -157.13)
+scale = Vector2(0.376812, 0.376812)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BloodRoot"]
+position = Vector2(1355, 421)
+shape = SubResource("CircleShape2D_qvuol")
+
+[connection signal="body_entered" from="BloodRoot" to="." method="_on_blood_root_body_entered"]
+[connection signal="body_exited" from="BloodRoot" to="." method="_on_blood_root_body_exited"]

@@ -2,7 +2,7 @@
 "@path": "res://addons/dialogic/Resources/character.gd",
 "@subpath": NodePath(""),
 "_translation_id": "",
-"color": Color(1, 1, 1, 1),
+"color": Color(0.608272, 0.458221, 0.710938, 1),
 "custom_info": {
 "prefix": "",
 "sound_mood_default": "",
@@ -10,7 +10,7 @@
 "style": "",
 "suffix": ""
 },
-"default_portrait": "",
+"default_portrait": "Vamp",
 "description": "",
 "display_name": "Vampire",
 "mirror": false,
@@ -20,6 +20,15 @@
 "": {
 "export_overrides": {
 "image": ""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Vamp": {
+"export_overrides": {
+"image": "\"res://Assets/CharcterSprites/vampireidlesheett.png.import\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),

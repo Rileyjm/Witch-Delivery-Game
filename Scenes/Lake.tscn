@@ -1,11 +1,12 @@
-[gd_scene load_steps=33 format=4 uid="uid://cji4lnqwsi2j1"]
+[gd_scene load_steps=35 format=4 uid="uid://cji4lnqwsi2j1"]
 
+[ext_resource type="Script" path="res://Scripts/lake.gd" id="1_gjw3p"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_wxirp"]
-[ext_resource type="Texture2D" path="res://Assets/TileSets/ancient-ashspring.png" id="2_m0t6b"]
-[ext_resource type="Texture2D" path="res://Assets/TileSets/chaos-flower.png" id="3_2yjpk"]
-[ext_resource type="Texture2D" path="res://Assets/TileSets/cloud-berries.png" id="4_1hs55"]
-[ext_resource type="Texture2D" path="res://Assets/TileSets/rose-thorn.png" id="5_s6gml"]
-[ext_resource type="Texture2D" path="res://Assets/TileSets/whispering-bloom.png" id="6_bm1ly"]
+[ext_resource type="Texture2D" uid="uid://xjxm1svr3as" path="res://Assets/Flowers/ancient-ashspring.png" id="2_m0t6b"]
+[ext_resource type="Texture2D" uid="uid://bcufoifshx2d0" path="res://Assets/Flowers/chaos-flower.png" id="3_2yjpk"]
+[ext_resource type="Texture2D" uid="uid://dblpjlg8hu7ve" path="res://Assets/Flowers/cloud-berries.png" id="4_1hs55"]
+[ext_resource type="Texture2D" uid="uid://cma8g0gbv8uja" path="res://Assets/Flowers/rose-thorn.png" id="5_s6gml"]
+[ext_resource type="Texture2D" uid="uid://drvtcej82e18c" path="res://Assets/Flowers/whispering-bloom.png" id="6_bm1ly"]
 [ext_resource type="Texture2D" uid="uid://yxyghyhwe4qa" path="res://Assets/TileSets/trees.png" id="9_ogai8"]
 [ext_resource type="Texture2D" uid="uid://cxfuc1gxbnkgu" path="res://Assets/TileSets/TileSet_V2.png" id="11_iwce2"]
 [ext_resource type="Texture2D" uid="uid://cn81xkisees4m" path="res://Assets/TileSets/TileSet_V1.png" id="12_620ff"]
@@ -1733,7 +1734,11 @@ size = Vector2(2272.94, 66.9608)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v1ekk"]
 size = Vector2(680.5, 78)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipfjn"]
+size = Vector2(65, 379)
+
 [node name="Lake" type="Node2D"]
+script = ExtResource("1_gjw3p")
 
 [node name="Herb" type="TileMapLayer" parent="."]
 visibility_layer = 7
@@ -1807,3 +1812,11 @@ shape = SubResource("RectangleShape2D_fchga")
 [node name="CollisionShape2D9" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-1433.75, 1732)
 shape = SubResource("RectangleShape2D_v1ekk")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1054, 1558)
+shape = SubResource("RectangleShape2D_ipfjn")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

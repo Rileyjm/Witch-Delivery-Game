@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b020gr6phj6gq"
-path="res://.godot/imported/trees.png-ec9c6a35f2bae8035aede3ff3c3d36ce.ctex"
+uid="uid://dlhoh7ifx8nwt"
+path="res://.godot/imported/mermaididle.png-8896eba4343438d452964f3d01a0c7e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/trees.png"
-dest_files=["res://.godot/imported/trees.png-ec9c6a35f2bae8035aede3ff3c3d36ce.ctex"]
+source_file="res://Assets/CharcterSprites/mermaididle.png"
+dest_files=["res://.godot/imported/mermaididle.png-8896eba4343438d452964f3d01a0c7e4.ctex"]
 
 [params]
 

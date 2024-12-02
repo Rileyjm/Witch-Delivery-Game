@@ -1,0 +1,160 @@
+[gd_scene load_steps=21 format=3 uid="uid://btxmhbikyt4jp"]
+
+[ext_resource type="Texture2D" uid="uid://cppmxk0svonjl" path="res://Assets/Tiny Swords (Update 010)/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="1_753ho"]
+[ext_resource type="Script" path="res://Scripts/pawn.gd" id="1_hgyib"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pgr7b"]
+radius = 337.148
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_te8xl"]
+
+[sub_resource type="Animation" id="Animation_8abne"]
+resource_name = "Idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_fcp7l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_q46a2"]
+resource_name = "attack"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+}
+
+[sub_resource type="Animation" id="Animation_5e055"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o0jwi"]
+_data = {
+"Idle": SubResource("Animation_8abne"),
+"RESET": SubResource("Animation_fcp7l"),
+"attack": SubResource("Animation_q46a2"),
+"walk": SubResource("Animation_5e055")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8yv14"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lr6ps"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5u0oh"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x36b5"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vhujv"]
+advance_mode = 2
+advance_condition = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l472u"]
+advance_condition = &"IsAttacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ki23"]
+advance_mode = 2
+advance_condition = &"isAttacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_21ih3"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6bqa5"]
+advance_mode = 2
+advance_condition = &"isNotAttacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_siaah"]
+advance_mode = 2
+advance_condition = &"notWalk"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qlam2"]
+states/Idle/node = SubResource("AnimationNodeAnimation_8yv14")
+states/Idle/position = Vector2(326, 116)
+states/attack/node = SubResource("AnimationNodeAnimation_lr6ps")
+states/attack/position = Vector2(490, 174)
+states/walk/node = SubResource("AnimationNodeAnimation_5u0oh")
+states/walk/position = Vector2(505, 43)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_x36b5"), "Idle", "walk", SubResource("AnimationNodeStateMachineTransition_vhujv"), "Idle", "attack", SubResource("AnimationNodeStateMachineTransition_l472u"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_5ki23"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_21ih3"), "attack", "Idle", SubResource("AnimationNodeStateMachineTransition_6bqa5"), "walk", "Idle", SubResource("AnimationNodeStateMachineTransition_siaah")]
+
+[node name="pawn" type="CharacterBody2D"]
+texture_filter = 1
+script = ExtResource("1_hgyib")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_pgr7b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_te8xl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_753ho")
+hframes = 6
+vframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_o0jwi")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
+tree_root = SubResource("AnimationNodeStateMachine_qlam2")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/IsAttacking = false
+parameters/conditions/isAttacking = false
+parameters/conditions/isNotAttacking = false
+parameters/conditions/notWalk = true
+parameters/conditions/walk = false
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
