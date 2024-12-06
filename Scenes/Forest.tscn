@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://drogchpd5hw58"]
+[gd_scene load_steps=55 format=4 uid="uid://drogchpd5hw58"]
 
 [ext_resource type="Script" path="res://Scenes/forest.gd" id="1_fyfm2"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_ho3rt"]
@@ -15,7 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://cn81xkisees4m" path="res://Assets/TileSets/TileSet_V1.png" id="12_l2jbw"]
 [ext_resource type="PackedScene" uid="uid://cdo40f4qphovy" path="res://Player.tscn" id="13_oaydb"]
 [ext_resource type="Texture2D" uid="uid://b0gdd8gasjiyn" path="res://Assets/TileSets/Log.png" id="15_p3jb0"]
-[ext_resource type="Script" path="res://Scripts/reward_effects.gd" id="16_qcrmr"]
+[ext_resource type="Script" path="res://Scripts/log.gd" id="16_qcrmr"]
+[ext_resource type="Script" path="res://Scripts/squirrel.gd" id="17_btxia"]
+[ext_resource type="Texture2D" uid="uid://dwuh2tdw2n3dj" path="res://Assets/squirrel_idle.png" id="17_oyjfk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4xjdx"]
 texture = ExtResource("1_ho3rt")
@@ -1656,14 +1658,17 @@ size = Vector2(105.5, 138)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqlpl"]
 size = Vector2(129.5, 200.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4tir0"]
+size = Vector2(170, 144.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nd1bf"]
 size = Vector2(632.5, 91)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3cf88"]
-size = Vector2(120, 51)
+size = Vector2(116, 76)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t7sil"]
-size = Vector2(120, 54)
+size = Vector2(122, 74)
 
 [node name="Forest" type="Node2D"]
 script = ExtResource("1_fyfm2")
@@ -1763,6 +1768,10 @@ shape = SubResource("RectangleShape2D_o183x")
 position = Vector2(1843.25, 11.75)
 shape = SubResource("RectangleShape2D_aqlpl")
 
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2213, -361)
+shape = SubResource("RectangleShape2D_4tir0")
+
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -1788,6 +1797,28 @@ texture = ExtResource("15_p3jb0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LogArea"]
 position = Vector2(1603, -201)
+shape = SubResource("RectangleShape2D_t7sil")
+
+[node name="Squirrel" type="RigidBody2D" parent="." node_paths=PackedStringArray("area")]
+mass = 0.001
+gravity_scale = 0.0
+script = ExtResource("17_btxia")
+area = NodePath("../SquirrelArea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Squirrel"]
+position = Vector2(2028, -501)
+shape = SubResource("RectangleShape2D_3cf88")
+
+[node name="Squirrel" type="Sprite2D" parent="Squirrel"]
+position = Vector2(2019.98, -510.003)
+rotation = -6.28319
+scale = Vector2(0.612501, 0.524967)
+texture = ExtResource("17_oyjfk")
+
+[node name="SquirrelArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquirrelArea"]
+position = Vector2(2021, -500)
 shape = SubResource("RectangleShape2D_t7sil")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
