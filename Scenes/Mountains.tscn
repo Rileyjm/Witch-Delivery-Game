@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=4 uid="uid://cou3aw8k5xjf4"]
+[gd_scene load_steps=88 format=4 uid="uid://cou3aw8k5xjf4"]
 
 [ext_resource type="Script" path="res://Scripts/mountains.gd" id="1_4s0n4"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_gfd6s"]
@@ -26,6 +26,8 @@
 [ext_resource type="Script" path="res://Scenes/bloodroot.gd" id="24_2hc1s"]
 [ext_resource type="Script" path="res://Scenes/daisy.gd" id="25_27x3i"]
 [ext_resource type="Texture2D" uid="uid://bcufoifshx2d0" path="res://Assets/Flowers/chaos-flower.png" id="25_ks37c"]
+[ext_resource type="Script" path="res://Scripts/rock.gd" id="27_dtxec"]
+[ext_resource type="Texture2D" uid="uid://bw5rrs7xvokpr" path="res://Assets/rocks.png" id="28_mjomi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6l5q6"]
 texture = ExtResource("2_8surp")
@@ -7763,6 +7765,12 @@ size = Vector2(30, 165.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_qvuol"]
 radius = 65.6201
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ec7o"]
+size = Vector2(204, 137)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfbos"]
+size = Vector2(213, 146)
+
 [node name="Mountains" type="Node2D"]
 script = ExtResource("1_4s0n4")
 
@@ -7847,7 +7855,7 @@ texture_filter = 1
 tile_map_data = PackedByteArray("AAD//xYAAAACAAwAAAAcACkAAQABAAMAAAAdACkAAQACAAMAAAAeACcAAQADAAEAAAASACkAAQABAAMAAAATACkAAQACAAMAAAAqAD0AAAACAAAAAAAzADkAAAAaAAAAAAA9AD4AAAAOAAwAAAA6ADgAAAAmAAAAAABIADoAAAACAAwAAABeAD8AAAACAAwAAABLAD8AAAAaAAAAAABWADgAAAAaAAAAAABRAD4AAAAaAAAAAABRABMAAAAaAAAAAAA7APj/AAAOAAAAAAA7AAQAAAAOAAwAAABHAPj/AAAaAAAAAABBAPv/AAAOAAAAAAAoAPb/AAAOAAAAAAAoAAQAAAAOAAAAAAA0APv/AAAaAAAAAABKAAUAAAAaAAAAAAAvAAQAAAAaAAAAAAAuAPf/AAAaAAAAAABCAAUAAAAmAAAAAAAmAP3/AAAmAAAAAABMAO//AAAOAAAAAABTAPP/AAAaAAAAAABQAPn/AAACAAAAAABPAPv/AAACAAAAAABSAAIAAAACAAwAAAAVANf/AgAMABAAAAAVANj/AgAMABEAAAAVANn/AgAMABIAAAAVANr/AgAMABMAAAAVANv/AgAMABQAAAAVANz/AgAMABUAAAAVAN3/AgAMABYAAAAVAN7/AgAMABcAAAAWANf/AgANABAAAAAWANj/AgANABEAAAAWANn/AgANABIAAAAWANr/AgANABMAAAAWANv/AgANABQAAAAWANz/AgANABUAAAAWAN3/AgANABYAAAAWAN7/AgANABcAAAAXANf/AgAOABAAAAAXANj/AgAOABEAAAAXANn/AgAOABIAAAAXANr/AgAOABMAAAAXANv/AgAOABQAAAAXANz/AgAOABUAAAAXAN3/AgAOABYAAAAXAN7/AgAOABcAAAAYANf/AgAPABAAAAAYANj/AgAPABEAAAAYANn/AgAPABIAAAAYANr/AgAPABMAAAAYANv/AgAPABQAAAAYANz/AgAPABUAAAAYAN3/AgAPABYAAAAYAN7/AgAPABcAAADH/+T/AAACAAwAAADF/9n/AAACAAwAAADA/9X/AAAOAAwAAAC7/8j/AAACAAwAAACx/7j/AAAmAAAAAAC7/7r/AAAOAAAAAAC7/6b/AAACAAAAAAC1/5f/AAACAAAAAAC6/4v/AAAaAAAAAADF/4T/AAAaAAAAAADH/33/AAAaAAAAAADB/4P/AAAOAAAAAAC7/3//AAAOAAAAAAC6/5b/AAAOAAAAAAC2/6D/AAAOAAAAAAC2/5//AAAOAAAAAAC6/53/AAAOAAAAAAC1/47/AAAOAAwAAAC6/7D/AAAOAAAAAAC2/6//AAAOAAAAAAC1/6b/AAAOAAAAAAC0/6b/AAAOAAAAAAC1/7//AAAaAAAAAAC0/7//AAAaAAAAAACx/8X/AAAaAAAAAAC2/7n/AAAaAAAAAAC1/8v/AAAaAAAAAAC1/8z/AAAaAAAAAAC4/9b/AAAaAAAAAAC4/9f/AAAaAAAAAAC5/9f/AAAaAAAAAAC8/+H/AAAaAAAAAAC4/+r/AAAaAAAAAADB/+n/AAAmAAAAAAA=")
 tile_set = SubResource("TileSet_1181r")
 
-[node name="Player" parent="." instance=ExtResource("10_i3bjx")]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("10_i3bjx")]
 z_index = 2
 position = Vector2(-118, 611)
 scale = Vector2(1.2, 1.2)
@@ -8210,6 +8218,32 @@ scale = Vector2(0.376812, 0.376812)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Daisy/Daisy"]
 position = Vector2(1355, 421)
 shape = SubResource("CircleShape2D_qvuol")
+
+[node name="Rock" type="RigidBody2D" parent="." node_paths=PackedStringArray("area")]
+mass = 0.001
+gravity_scale = 0.0
+script = ExtResource("27_dtxec")
+area = NodePath("../RockArea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock"]
+z_index = 1
+position = Vector2(187, -473.5)
+shape = SubResource("RectangleShape2D_5ec7o")
+
+[node name="Rock" type="Sprite2D" parent="Rock"]
+z_index = 1
+texture_filter = 1
+position = Vector2(187.35, -474.113)
+rotation = -6.28319
+scale = Vector2(2.60111, 2.75625)
+texture = ExtResource("28_mjomi")
+
+[node name="RockArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RockArea"]
+z_index = 1
+position = Vector2(187.5, -474)
+shape = SubResource("RectangleShape2D_xfbos")
 
 [connection signal="body_shape_entered" from="entrance" to="." method="_on_entrance_body_shape_entered"]
 [connection signal="body_shape_entered" from="entrance2" to="." method="_on_entrance_body_shape_entered"]
