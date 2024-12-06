@@ -7869,14 +7869,12 @@ one_way_collision = true
 [node name="CollisionShape2D8" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(97.9743, 449.668)
 rotation = -1.5708
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_nqu0e")
 one_way_collision = true
 
 [node name="CollisionShape2D19" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(465.745, -555.244)
 rotation = -1.5708
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_dw5i3")
 one_way_collision = true
 
@@ -7972,7 +7970,6 @@ polygon = PackedVector2Array(-98, -725, -110, -743, -357, -745, -358, -901, -377
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-168.915, 460.844)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_pcxjt")
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D"]

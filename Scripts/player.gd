@@ -117,3 +117,6 @@ func pause():
 		Engine.time_scale = 0
 		
 	paused = !paused
+
+func _playerarea():
+	add_to_group("player")
