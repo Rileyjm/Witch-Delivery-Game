@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c0e343bs4vcff"
+path="res://.godot/imported/Success Every Day.mp3-5a6d2d0162b81d99363a787ee1839851.mp3str"
+
+[deps]
+
+source_file="res://Success Every Day.mp3"
+dest_files=["res://.godot/imported/Success Every Day.mp3-5a6d2d0162b81d99363a787ee1839851.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
