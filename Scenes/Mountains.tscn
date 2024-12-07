@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=4 uid="uid://cou3aw8k5xjf4"]
+[gd_scene load_steps=89 format=4 uid="uid://cou3aw8k5xjf4"]
 
 [ext_resource type="Script" path="res://Scripts/mountains.gd" id="1_4s0n4"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_gfd6s"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://bcufoifshx2d0" path="res://Assets/Flowers/chaos-flower.png" id="25_ks37c"]
 [ext_resource type="Script" path="res://Scripts/rock.gd" id="27_dtxec"]
 [ext_resource type="Texture2D" uid="uid://bw5rrs7xvokpr" path="res://Assets/rocks.png" id="28_mjomi"]
+[ext_resource type="PackedScene" uid="uid://7v4mukra2mip" path="res://bg_music.tscn" id="29_v20lk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6l5q6"]
 texture = ExtResource("2_8surp")
@@ -8244,6 +8245,13 @@ texture = ExtResource("28_mjomi")
 z_index = 1
 position = Vector2(187.5, -474)
 shape = SubResource("RectangleShape2D_xfbos")
+
+[node name="AudioStreamPlayer2D" parent="." instance=ExtResource("29_v20lk")]
+position = Vector2(360, -803)
+volume_db = -19.809
+max_distance = 20000.0
+attenuation = 7.01097e-05
+panning_strength = 0.0
 
 [connection signal="body_shape_entered" from="entrance" to="." method="_on_entrance_body_shape_entered"]
 [connection signal="body_shape_entered" from="entrance2" to="." method="_on_entrance_body_shape_entered"]
