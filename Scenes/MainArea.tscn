@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://c8ysksq7ap7fr" path="res://Assets/Charcter/mermaid.tscn" id="17_3kjkq"]
 [ext_resource type="Script" path="res://Assets/Charcter/mermaid.gd" id="18_p6gsf"]
 [ext_resource type="PackedScene" uid="uid://cmnhghv2x7auv" path="res://Assets/Charcter/Werewolf.tscn" id="19_ayit4"]
+[ext_resource type="PackedScene" uid="uid://7v4mukra2mip" path="res://bg_music.tscn" id="20_x06jo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bh8bq"]
 size = Vector2(3185.39, 49.2156)
@@ -1904,6 +1905,13 @@ shape = SubResource("RectangleShape2D_kkqra")
 [node name="pawn" parent="." node_paths=PackedStringArray("play") instance=ExtResource("10_nl3j3")]
 position = Vector2(238, 379)
 play = NodePath("../Player")
+
+[node name="AudioStreamPlayer2D" parent="." instance=ExtResource("20_x06jo")]
+position = Vector2(719, 612)
+volume_db = -19.809
+max_distance = 20000.0
+attenuation = 7.01097e-05
+panning_strength = 0.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="forestPath" to="." method="_on_forest_path_body_entered"]

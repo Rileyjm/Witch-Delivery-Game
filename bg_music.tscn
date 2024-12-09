@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://7v4mukra2mip"]
+
+[ext_resource type="AudioStream" uid="uid://c0e343bs4vcff" path="res://Success Every Day.mp3" id="1_fp4sv"]
+[ext_resource type="Script" path="res://bg_music.gd" id="2_778tk"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_fp4sv")
+autoplay = true
+script = ExtResource("2_778tk")
