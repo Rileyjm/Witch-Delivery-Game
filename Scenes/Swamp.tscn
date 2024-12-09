@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://b2c178wpt7jm0"]
+[gd_scene load_steps=58 format=4 uid="uid://b2c178wpt7jm0"]
 
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_quw3r"]
 [ext_resource type="Script" path="res://Scenes/swamp.gd" id="1_qy1fv"]
@@ -17,13 +17,13 @@
 [ext_resource type="Texture2D" uid="uid://6v88377tpumh" path="res://Assets/TileSets/swamp_tileset2.png" id="10_hao2c"]
 [ext_resource type="PackedScene" uid="uid://cdo40f4qphovy" path="res://Player.tscn" id="10_hkwcm"]
 [ext_resource type="Texture2D" uid="uid://cthncbxw8kxsa" path="res://Assets/TileSets/swamp_tileset3.png" id="11_2n6uq"]
+[ext_resource type="Script" path="res://Scenes/fog.gd" id="17_31w1t"]
 [ext_resource type="Script" path="res://Scenes/brain.gd" id="18_aitkh"]
+[ext_resource type="Texture2D" uid="uid://cvg60hhn43qin" path="res://Scripts/smoke..png" id="18_f6o6q"]
+[ext_resource type="PackedScene" uid="uid://7v4mukra2mip" path="res://bg_music.tscn" id="19_5vbyc"]
 [ext_resource type="Texture2D" uid="uid://bu8htxlxdp4p8" path="res://Assets/Flowers/looking-grass.png" id="19_2506d"]
 [ext_resource type="Script" path="res://Scenes/grass.gd" id="20_oeoys"]
 [ext_resource type="Script" path="res://Scenes/rootbulb.gd" id="21_44bxc"]
-[ext_resource type="Script" path="res://Scenes/fog.gd" id="17_31w1t"]
-[ext_resource type="Texture2D" uid="uid://cvg60hhn43qin" path="res://Scripts/smoke..png" id="18_f6o6q"]
-[ext_resource type="PackedScene" uid="uid://7v4mukra2mip" path="res://bg_music.tscn" id="19_5vbyc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4xjdx"]
 texture = ExtResource("1_quw3r")
@@ -1866,14 +1866,6 @@ script = ExtResource("21_44bxc")
 texture_filter = 1
 shape = SubResource("CircleShape2D_jhask")
 
-[connection signal="body_entered" from="exit" to="." method="_on_exit_body_entered"]
-[connection signal="body_entered" from="brain/Area2D" to="brain" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="brain/Area2D" to="brain" method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="grass/Area2D" to="grass" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="grass/Area2D" to="grass" method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="rootbulb/Area2D" to="rootbulb" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="rootbulb/Area2D" to="rootbulb" method="_on_area_2d_body_exited"]
-
 [node name="Fog" type="RigidBody2D" parent="." node_paths=PackedStringArray("area")]
 mass = 0.001
 gravity_scale = 0.0
@@ -1902,3 +1894,11 @@ volume_db = -19.809
 max_distance = 20000.0
 attenuation = 7.01097e-05
 panning_strength = 0.0
+
+[connection signal="body_entered" from="exit" to="." method="_on_exit_body_entered"]
+[connection signal="body_entered" from="brain/Area2D" to="brain" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="brain/Area2D" to="brain" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="grass/Area2D" to="grass" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="grass/Area2D" to="grass" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="rootbulb/Area2D" to="rootbulb" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="rootbulb/Area2D" to="rootbulb" method="_on_area_2d_body_exited"]

@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://d3asrb7vh4ua5" path="res://Assets/Charcter/Vampire.tscn" id="7_wuthm"]
 [ext_resource type="Texture2D" uid="uid://cnpite6yc3xdy" path="res://Assets/Tiny Swords (Update 010)/Resources/Trees/Tree.png" id="9_pwcbf"]
 [ext_resource type="Texture2D" uid="uid://1i2yyob6cfyd" path="res://Assets/Tiny Swords (Update 010)/Deco/09.png" id="10_0g6ka"]
-[ext_resource type="PackedScene" uid="uid://btxmhbikyt4jp" path="res://Assets/Charcter/pawn.tscn" id="10_nl3j3"]
 [ext_resource type="Script" path="res://Assets/Charcter/goblin.gd" id="11_ay17k"]
 [ext_resource type="PackedScene" uid="uid://bs65vl0j2ej3d" path="res://Assets/Charcter/Goblin.tscn" id="12_4mlwd"]
 [ext_resource type="PackedScene" uid="uid://o6mig15ycr5h" path="res://Assets/Charcter/fairy.tscn" id="15_7uw7v"]
@@ -1901,10 +1900,6 @@ scale = Vector2(1.3, 1.3)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwampPath"]
 position = Vector2(683, 2241)
 shape = SubResource("RectangleShape2D_kkqra")
-
-[node name="pawn" parent="." node_paths=PackedStringArray("play") instance=ExtResource("10_nl3j3")]
-position = Vector2(238, 379)
-play = NodePath("../Player")
 
 [node name="AudioStreamPlayer2D" parent="." instance=ExtResource("20_x06jo")]
 position = Vector2(719, 612)

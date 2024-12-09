@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=4 uid="uid://cou3aw8k5xjf4"]
+[gd_scene load_steps=90 format=4 uid="uid://cou3aw8k5xjf4"]
 
 [ext_resource type="Script" path="res://Scripts/mountains.gd" id="1_4s0n4"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_gfd6s"]
@@ -26,9 +26,8 @@
 [ext_resource type="Script" path="res://Scenes/bloodroot.gd" id="24_2hc1s"]
 [ext_resource type="Script" path="res://Scenes/daisy.gd" id="25_27x3i"]
 [ext_resource type="Texture2D" uid="uid://de5ihahdr6u0t" path="res://Assets/Flowers/crimson-daisy.png" id="25_qrdcv"]
-[ext_resource type="PackedScene" uid="uid://btxmhbikyt4jp" path="res://Assets/Charcter/pawn.tscn" id="27_e2klq"]
-[ext_resource type="Texture2D" uid="uid://bcufoifshx2d0" path="res://Assets/Flowers/chaos-flower.png" id="25_ks37c"]
 [ext_resource type="Script" path="res://Scripts/rock.gd" id="27_dtxec"]
+[ext_resource type="PackedScene" uid="uid://btxmhbikyt4jp" path="res://Assets/Charcter/pawn.tscn" id="27_e2klq"]
 [ext_resource type="Texture2D" uid="uid://bw5rrs7xvokpr" path="res://Assets/rocks.png" id="28_mjomi"]
 [ext_resource type="PackedScene" uid="uid://7v4mukra2mip" path="res://bg_music.tscn" id="29_v20lk"]
 
@@ -8225,18 +8224,18 @@ shape = SubResource("CircleShape2D_qvuol")
 [node name="pawn" parent="." node_paths=PackedStringArray("play") instance=ExtResource("27_e2klq")]
 z_index = 2
 position = Vector2(1410, 478)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.8, 0.8)
 play = NodePath("../Player")
 
 [node name="pawn2" parent="." node_paths=PackedStringArray("play") instance=ExtResource("27_e2klq")]
 z_index = 1
 position = Vector2(283, -397)
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.8, 0.8)
 play = NodePath("../Player")
 
 [node name="pawn3" parent="." node_paths=PackedStringArray("play") instance=ExtResource("27_e2klq")]
 position = Vector2(1746, -1499)
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.8, 0.8)
 play = NodePath("../Player")
 
 [node name="Rock" type="RigidBody2D" parent="." node_paths=PackedStringArray("area")]

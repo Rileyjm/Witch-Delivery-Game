@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://cji4lnqwsi2j1"]
+[gd_scene load_steps=56 format=4 uid="uid://cji4lnqwsi2j1"]
 
 [ext_resource type="Script" path="res://Scripts/lake.gd" id="1_gjw3p"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_wxirp"]
@@ -18,8 +18,8 @@
 [ext_resource type="Script" path="res://Scenes/featherleaf.gd" id="13_m0dpy"]
 [ext_resource type="Script" path="res://Scenes/cloud_berries.gd" id="14_6pkva"]
 [ext_resource type="Texture2D" uid="uid://dq45fw577pdoq" path="res://Assets/Flowers/bubblebush-blossoms.png" id="15_24isc"]
-[ext_resource type="Script" path="res://Scenes/bubblebush.gd" id="16_8xb7g"]
 [ext_resource type="Script" path="res://Scripts/swarm.gd" id="15_pgjbb"]
+[ext_resource type="Script" path="res://Scenes/bubblebush.gd" id="16_8xb7g"]
 [ext_resource type="Texture2D" uid="uid://0i7st6mnji7s" path="res://Assets/Dragonfly Sprite Sheet.png" id="16_ip5qy"]
 [ext_resource type="Script" path="res://Scenes/tall_grass.gd" id="17_y0v0c"]
 [ext_resource type="Texture2D" uid="uid://d30o0e6a6vcse" path="res://Assets/tall_grass.png" id="18_2akbl"]
