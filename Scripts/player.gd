@@ -177,3 +177,6 @@ func pawnDmgCheck():
 			enemy.takeDamage()
 		else:
 			print("Enemy object is null!")
+
+func _playerarea():
+	add_to_group("player")
