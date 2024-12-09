@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@onready var enemy = $pawn
 @onready var pauseMenu = $Pause
 var paused
 var speed = 0
@@ -13,6 +14,15 @@ var input = Vector2.ZERO
 var pawnInArea = false
 var damageE = false
 
+var health = 100
+var maxHealth = 100
+var playerAlive = true
+
+@onready var enemyInArea = false
+var enemyAttackCooldown = true
+var attackCooldown = true
+
+signal healthChanged
 
 func _ready() -> void:
 	$atkArea/attack.hide()
@@ -32,13 +42,21 @@ func _physics_process(delta):
 	else:
 		speed = walk
 	attack()
-	#attackPos()
+	enemyAttack()
 	
-	if pawnInArea:
-		print("pawndamage")
+	pawnDmgCheck()
 
+	if damageE:
+		print("damasdad")
 	if Input.is_action_just_pressed("pause"):
 		pause()
+	
+	if health <=0:
+		playerAlive = false
+		health = 0
+		print("golly im dead")
+		self.queue_free()
+	
 	
 func player():
 	pass
@@ -62,9 +80,14 @@ func player_movement(delta):
 	move_and_slide()
 
 func attack():
-	if Input.is_action_just_pressed("talk"):
+	if Input.is_action_just_pressed("attack") && attackCooldown == true:
 		$atkArea/attack/AnimationPlayer.play("explosion")
 		damageE = true
+		attackCooldown = false
+		$AtckCoolDown.start()
+	else:
+		damageE = false
+		
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -102,6 +125,9 @@ func attackPostBL():
 func _on_atk_area_body_entered(body: Node2D) -> void:
 	if body.has_method("pawnB"):
 		pawnInArea = true
+	if body.has_method("takeDamage"):
+		enemy = body 
+		print("Enemy detected: ", enemy)
 
 
 func _on_atk_area_body_exited(body: Node2D) -> void:
@@ -117,6 +143,40 @@ func pause():
 		Engine.time_scale = 0
 		
 	paused = !paused
+
+
+func _on_hit_box_body_entered(body: Node2D) -> void:
+	if body.has_method("pawnB"):
+		enemyInArea = true
+		
+
+
+func _on_hit_box_body_exited(body: Node2D) -> void:
+	if body.has_method("pawnB"):
+		enemyInArea = false
+		
+func enemyAttack():
+	if enemyInArea && enemyAttackCooldown == true:
+		health = health - 20
+		enemyAttackCooldown = false
+		healthChanged.emit()
+		$hitCooldown.start()
+		print(health)
+
+
+func _on_hit_cooldown_timeout() -> void:
+	enemyAttackCooldown = true
+
+
+func _on_atck_cool_down_timeout() -> void:
+	attackCooldown = true
+	
+func pawnDmgCheck():
+	if pawnInArea == true && damageE == true:
+		if enemy != null:
+			enemy.takeDamage()
+		else:
+			print("Enemy object is null!")
 
 func _playerarea():
 	add_to_group("player")

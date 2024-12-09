@@ -16,7 +16,9 @@ func _process(delta: float) -> void:
 			run_dialogue("fairyD")
 		if Input.is_action_just_pressed("talk") && Global.fairyDia == 3:
 			run_dialogue("fairyP")
+			Global.score = Global.score +20
 
+	Global.fDiaCheck()
 func _on_f_chat_body_entered(body: Node2D) -> void:
 	if body.has_method("player"):
 		playerInArea = true

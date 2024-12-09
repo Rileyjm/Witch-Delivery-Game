@@ -1,13 +1,18 @@
 extends CharacterBody2D
 
-
+@onready var pl = $Player
 var speed = 120
 var playerChase = false
 var player = null
 var pawn = null
+@export var health = 40
 var distance_to_enemy: float = 0.0
 @export var play: Node2D = null
+var pawnIsDead = false
 
+
+func _ready() -> void:
+	$death.hide()
 
 func _physics_process(delta: float) -> void:
 	if playerChase && distance_to_enemy>70:
@@ -21,9 +26,19 @@ func _physics_process(delta: float) -> void:
 	spriteFlip()
 	isAttacking()
 	
-	if play:
-		distance_to_enemy = global_position.distance_to(play.global_position)
+	if play && is_instance_valid(play):
+			distance_to_enemy = global_position.distance_to(play.global_position)
 		#print("Distance to enemy: ", distance_to_enemy)
+	
+		
+	if health<=0:
+		pawnIsDead = true
+		$death.show()
+		$Sprite2D/AnimationTree.set("parameters/conditions/dead",true)
+		$Sprite2D.hide()
+		playerChase = false
+		$Area2D/CollisionShape2D.disabled
+		$CollisionShape2D.disabled = true
 		
 
 
@@ -60,6 +75,10 @@ func isAttacking():
 	else:
 		$Sprite2D/AnimationTree.set("parameters/conditions/isNotAttacking",true)
 		$Sprite2D/AnimationTree.set("parameters/conditions/isAttacking",false)
+		
+		
+func takeDamage():
+		health = health - 40
 		
 func pawnB():
 	pass

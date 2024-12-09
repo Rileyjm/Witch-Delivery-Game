@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 			run_dialogue("VampD")
 		if Input.is_action_just_pressed("talk") && Global.vampDia == 3:
 			run_dialogue("VampP")
+			Global.score = Global.score +20
 			
 			
 	Global.diaCheck()
