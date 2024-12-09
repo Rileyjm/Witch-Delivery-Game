@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cdo40f4qphovy"]
+[gd_scene load_steps=43 format=3 uid="uid://cdo40f4qphovy"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_uvo2j"]
 [ext_resource type="Texture2D" uid="uid://b3jj82d72dtfn" path="res://Assets/CharcterSprites/witchnewspritesheet.png" id="2_8wcc3"]
@@ -6,9 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://dhwv2mnhwe8me" path="res://Assets/Tiny Swords (Update 010)/Effects/Explosion/Explosions.png" id="4_8hg1l"]
 [ext_resource type="Texture2D" uid="uid://cb3d32k4yw2te" path="res://Assets/Empty.png" id="4_r85ae"]
 [ext_resource type="PackedScene" uid="uid://tll1uuhe2ysh" path="res://Scenes/Pause.tscn" id="6_kfry0"]
+[ext_resource type="Texture2D" uid="uid://debd34ely3qxl" path="res://Assets/heart_meter_wo.png" id="7_iw14c"]
+[ext_resource type="Texture2D" uid="uid://cdioqw3ht6vkp" path="res://Assets/fill_green.png" id="8_fuoft"]
+[ext_resource type="Script" path="res://health_bar.gd" id="9_jess4"]
+[ext_resource type="Script" path="res://score.gd" id="10_k641m"]
+[ext_resource type="FontFile" uid="uid://dk2rsye3q5go7" path="res://Assets/Peaberry-Font-v2.0/Peaberry-Font-v2.0/Peaberry Font Family/Peaberry Base/Peaberry-Base.otf" id="10_votok"]
+[ext_resource type="Texture2D" uid="uid://d1owhjn76bqgp" path="res://Assets/UI/Banners/Banner_Connection_Left.png" id="12_tukho"]
+[ext_resource type="Texture2D" uid="uid://ch6gdmbw4fw0l" path="res://Assets/Tiny Swords (Update 010)/Resources/Resources/G_Idle_(NoShadow).png" id="13_xqayh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ny0pe"]
-size = Vector2(16.3218, 17.7124)
+size = Vector2(12.069, 17.1191)
 
 [sub_resource type="Animation" id="Animation_ka5nl"]
 resource_name = "Idle_Left"
@@ -343,7 +350,7 @@ transitions = ["Start", "BlendSpace2D", SubResource("AnimationNodeStateMachineTr
 graph_offset = Vector2(-248, -71)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oo8vq"]
-radius = 25.1247
+radius = 27.5284
 
 [sub_resource type="Animation" id="Animation_1lxe8"]
 length = 0.001
@@ -415,13 +422,16 @@ _data = {
 "new_animation": SubResource("Animation_8afk8")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_udn4r"]
+radius = 33.75
+
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 2
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_uvo2j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2.5, 1.16)
+position = Vector2(-0.625, 1.78501)
 scale = Vector2(2.175, 2.107)
 shape = SubResource("RectangleShape2D_ny0pe")
 
@@ -451,7 +461,7 @@ position = Vector2(-106.25, 2.5)
 
 [node name="atk" type="CollisionShape2D" parent="atkArea"]
 z_index = 5
-position = Vector2(41.25, -3.8147e-06)
+position = Vector2(40, -1.25)
 shape = SubResource("CircleShape2D_oo8vq")
 
 [node name="attack" type="Sprite2D" parent="atkArea"]
@@ -486,7 +496,69 @@ grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(1.635, 1.635)
 
+[node name="hitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+shape = SubResource("CircleShape2D_udn4r")
+
+[node name="hitCooldown" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="AtckCoolDown" type="Timer" parent="."]
+wait_time = 3.13
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 6
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[node name="healthBar" type="TextureProgressBar" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 2.0
+offset_top = 1.83333
+offset_right = 51.0
+offset_bottom = 15.8333
+scale = Vector2(2, 2)
+value = 25.0
+texture_under = ExtResource("7_iw14c")
+texture_over = ExtResource("7_iw14c")
+texture_progress = ExtResource("8_fuoft")
+texture_progress_offset = Vector2(9.96, 0)
+script = ExtResource("9_jess4")
+metadata/_edit_use_anchors_ = true
+
+[node name="score" type="Label" parent="CanvasLayer"]
+z_index = 1
+texture_filter = 1
+offset_left = 232.0
+offset_top = 7.5
+offset_right = 272.0
+offset_bottom = 30.5
+scale = Vector2(0.702522, 0.718784)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_votok")
+text = "sad"
+horizontal_alignment = 1
+script = ExtResource("10_k641m")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/score"]
+z_index = -1
+texture_filter = 1
+position = Vector2(25.9778, 8.69524)
+scale = Vector2(-0.503602, 0.374902)
+texture = ExtResource("12_tukho")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer/score"]
+texture_filter = 1
+position = Vector2(45.1943, 1.73905)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("13_xqayh")
+
 [connection signal="body_entered" from="atkArea" to="." method="_on_atk_area_body_entered"]
 [connection signal="body_exited" from="atkArea" to="." method="_on_atk_area_body_exited"]
 [connection signal="animation_finished" from="atkArea/attack/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="atkArea/attack/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
+[connection signal="body_entered" from="hitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="body_exited" from="hitBox" to="." method="_on_hit_box_body_exited"]
+[connection signal="timeout" from="hitCooldown" to="." method="_on_hit_cooldown_timeout"]
+[connection signal="timeout" from="AtckCoolDown" to="." method="_on_atck_cool_down_timeout"]

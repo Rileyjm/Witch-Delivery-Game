@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://drogchpd5hw58"]
+[gd_scene load_steps=53 format=4 uid="uid://drogchpd5hw58"]
 
 [ext_resource type="Script" path="res://Scenes/forest.gd" id="1_fyfm2"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_ho3rt"]
@@ -14,6 +14,11 @@
 [ext_resource type="Texture2D" uid="uid://cxfuc1gxbnkgu" path="res://Assets/TileSets/TileSet_V2.png" id="11_iay7d"]
 [ext_resource type="Texture2D" uid="uid://cn81xkisees4m" path="res://Assets/TileSets/TileSet_V1.png" id="12_l2jbw"]
 [ext_resource type="PackedScene" uid="uid://cdo40f4qphovy" path="res://Player.tscn" id="13_oaydb"]
+[ext_resource type="Texture2D" uid="uid://cnuxqmg4dkf7j" path="res://Assets/Flowers/snowdrop.png" id="15_xw7pl"]
+[ext_resource type="Script" path="res://Scenes/snow_drop.gd" id="16_cflm2"]
+[ext_resource type="Texture2D" uid="uid://d2l014m4l6ja5" path="res://Assets/Flowers/light-fruit.png" id="17_4prw1"]
+[ext_resource type="Script" path="res://Scenes/light_fruit.gd" id="18_rqb3y"]
+[ext_resource type="Script" path="res://Scenes/chaos.gd" id="19_cqwlx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4xjdx"]
 texture = ExtResource("1_ho3rt")
@@ -1645,6 +1650,14 @@ size = Vector2(57.75, 1174)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nd1bf"]
 size = Vector2(632.5, 91)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_cgyce"]
+radius = 35.2568
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wp6ui"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cv8yd"]
+radius = 65.6201
+
 [node name="Forest" type="Node2D"]
 script = ExtResource("1_fyfm2")
 
@@ -1737,4 +1750,52 @@ shape = SubResource("RectangleShape2D_udv1q")
 position = Vector2(-472, 2275)
 shape = SubResource("RectangleShape2D_nd1bf")
 
+[node name="SnowDrop" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(306, 801)
+scale = Vector2(3, 3)
+texture = ExtResource("15_xw7pl")
+script = ExtResource("16_cflm2")
+
+[node name="Area2D" type="Area2D" parent="SnowDrop"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SnowDrop/Area2D"]
+shape = SubResource("CircleShape2D_cgyce")
+
+[node name="lightFruit" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1896, 1869)
+scale = Vector2(3, 3)
+texture = ExtResource("17_4prw1")
+script = ExtResource("18_rqb3y")
+
+[node name="Area2D" type="Area2D" parent="lightFruit"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lightFruit/Area2D"]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_wp6ui")
+
+[node name="chaos" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(1613, -63)
+scale = Vector2(2.65385, 2.65385)
+texture = ExtResource("3_jsr8q")
+script = ExtResource("19_cqwlx")
+
+[node name="Daisy" type="Area2D" parent="chaos"]
+z_index = 2
+position = Vector2(-511.333, -157.13)
+scale = Vector2(0.376812, 0.376812)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chaos/Daisy"]
+position = Vector2(1355, 421)
+shape = SubResource("CircleShape2D_cv8yd")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="SnowDrop/Area2D" to="SnowDrop" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="SnowDrop/Area2D" to="SnowDrop" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="lightFruit/Area2D" to="lightFruit" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="lightFruit/Area2D" to="lightFruit" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="chaos/Daisy" to="chaos" method="_on_daisy_body_entered"]
+[connection signal="body_exited" from="chaos/Daisy" to="chaos" method="_on_daisy_body_exited"]

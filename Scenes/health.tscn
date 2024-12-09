@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcss7pf1xsf5m"]
+
+[ext_resource type="Texture2D" uid="uid://debd34ely3qxl" path="res://Assets/heart_meter_wo.png" id="1_ag3cr"]
+[ext_resource type="Texture2D" uid="uid://cdioqw3ht6vkp" path="res://Assets/fill_green.png" id="2_f52ud"]
+[ext_resource type="Script" path="res://Scenes/health_bar.gd" id="3_o7luc"]
+
+[node name="Health" type="CanvasLayer"]
+
+[node name="healthBar" type="TextureProgressBar" parent="."]
+texture_filter = 1
+offset_left = 2.0
+offset_top = 4.0
+offset_right = 51.0
+offset_bottom = 18.0
+scale = Vector2(2, 2)
+value = 25.0
+texture_under = ExtResource("1_ag3cr")
+texture_over = ExtResource("1_ag3cr")
+texture_progress = ExtResource("2_f52ud")
+texture_progress_offset = Vector2(9.96, 0)
+script = ExtResource("3_o7luc")
+metadata/_edit_use_anchors_ = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=4 uid="uid://cou3aw8k5xjf4"]
+[gd_scene load_steps=85 format=4 uid="uid://cou3aw8k5xjf4"]
 
 [ext_resource type="Script" path="res://Scripts/mountains.gd" id="1_4s0n4"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_gfd6s"]
@@ -25,7 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://da3wsou0g1g7f" path="res://Assets/Flowers/bloodroot.png" id="23_i7dlq"]
 [ext_resource type="Script" path="res://Scenes/bloodroot.gd" id="24_2hc1s"]
 [ext_resource type="Script" path="res://Scenes/daisy.gd" id="25_27x3i"]
-[ext_resource type="Texture2D" uid="uid://bcufoifshx2d0" path="res://Assets/Flowers/chaos-flower.png" id="25_ks37c"]
+[ext_resource type="Texture2D" uid="uid://de5ihahdr6u0t" path="res://Assets/Flowers/crimson-daisy.png" id="25_qrdcv"]
+[ext_resource type="PackedScene" uid="uid://btxmhbikyt4jp" path="res://Assets/Charcter/pawn.tscn" id="27_e2klq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6l5q6"]
 texture = ExtResource("2_8surp")
@@ -7869,14 +7870,12 @@ one_way_collision = true
 [node name="CollisionShape2D8" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(97.9743, 449.668)
 rotation = -1.5708
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_nqu0e")
 one_way_collision = true
 
 [node name="CollisionShape2D19" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(465.745, -555.244)
 rotation = -1.5708
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_dw5i3")
 one_way_collision = true
 
@@ -7972,7 +7971,6 @@ polygon = PackedVector2Array(-98, -725, -110, -743, -357, -745, -358, -901, -377
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-168.915, 460.844)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_pcxjt")
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D"]
@@ -8202,7 +8200,7 @@ z_index = 1
 texture_filter = 1
 position = Vector2(2092, -1490)
 scale = Vector2(2.65385, 2.65385)
-texture = ExtResource("25_ks37c")
+texture = ExtResource("25_qrdcv")
 script = ExtResource("25_27x3i")
 
 [node name="Daisy" type="Area2D" parent="Daisy"]
@@ -8213,6 +8211,23 @@ scale = Vector2(0.376812, 0.376812)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Daisy/Daisy"]
 position = Vector2(1355, 421)
 shape = SubResource("CircleShape2D_qvuol")
+
+[node name="pawn" parent="." node_paths=PackedStringArray("play") instance=ExtResource("27_e2klq")]
+z_index = 2
+position = Vector2(1410, 478)
+scale = Vector2(0.5, 0.5)
+play = NodePath("../Player")
+
+[node name="pawn2" parent="." node_paths=PackedStringArray("play") instance=ExtResource("27_e2klq")]
+z_index = 1
+position = Vector2(283, -397)
+scale = Vector2(0.6, 0.6)
+play = NodePath("../Player")
+
+[node name="pawn3" parent="." node_paths=PackedStringArray("play") instance=ExtResource("27_e2klq")]
+position = Vector2(1746, -1499)
+scale = Vector2(0.6, 0.6)
+play = NodePath("../Player")
 
 [connection signal="body_shape_entered" from="entrance" to="." method="_on_entrance_body_shape_entered"]
 [connection signal="body_shape_entered" from="entrance2" to="." method="_on_entrance_body_shape_entered"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://btxmhbikyt4jp"]
+[gd_scene load_steps=27 format=3 uid="uid://btxmhbikyt4jp"]
 
 [ext_resource type="Texture2D" uid="uid://cppmxk0svonjl" path="res://Assets/Tiny Swords (Update 010)/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="1_753ho"]
 [ext_resource type="Script" path="res://Scripts/pawn.gd" id="1_hgyib"]
+[ext_resource type="Texture2D" uid="uid://bbg878gpalgm6" path="res://Assets/Tiny Swords (Update 010)/Factions/Knights/Troops/Dead/Dead.png" id="3_uyk8f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pgr7b"]
 radius = 337.148
@@ -34,6 +35,18 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../death:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -74,11 +87,28 @@ tracks/0/keys = {
 "values": [6, 7, 8, 9, 10, 11]
 }
 
+[sub_resource type="Animation" id="Animation_eckky"]
+resource_name = "death"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../death:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o0jwi"]
 _data = {
 "Idle": SubResource("Animation_8abne"),
 "RESET": SubResource("Animation_fcp7l"),
 "attack": SubResource("Animation_q46a2"),
+"death": SubResource("Animation_eckky"),
 "walk": SubResource("Animation_5e055")
 }
 
@@ -87,6 +117,9 @@ animation = &"Idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lr6ps"]
 animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k668y"]
+animation = &"death"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5u0oh"]
 animation = &"walk"
@@ -116,14 +149,29 @@ advance_condition = &"isNotAttacking"
 advance_mode = 2
 advance_condition = &"notWalk"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qlbh4"]
+advance_mode = 2
+advance_condition = &"dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3wi1v"]
+advance_mode = 2
+advance_condition = &"dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4evup"]
+advance_mode = 2
+advance_condition = &"dead"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qlam2"]
+states/End/position = Vector2(1200, 100)
 states/Idle/node = SubResource("AnimationNodeAnimation_8yv14")
-states/Idle/position = Vector2(326, 116)
+states/Idle/position = Vector2(326, 117)
 states/attack/node = SubResource("AnimationNodeAnimation_lr6ps")
 states/attack/position = Vector2(490, 174)
+states/death/node = SubResource("AnimationNodeAnimation_k668y")
+states/death/position = Vector2(794, 100)
 states/walk/node = SubResource("AnimationNodeAnimation_5u0oh")
 states/walk/position = Vector2(505, 43)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_x36b5"), "Idle", "walk", SubResource("AnimationNodeStateMachineTransition_vhujv"), "Idle", "attack", SubResource("AnimationNodeStateMachineTransition_l472u"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_5ki23"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_21ih3"), "attack", "Idle", SubResource("AnimationNodeStateMachineTransition_6bqa5"), "walk", "Idle", SubResource("AnimationNodeStateMachineTransition_siaah")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_x36b5"), "Idle", "walk", SubResource("AnimationNodeStateMachineTransition_vhujv"), "Idle", "attack", SubResource("AnimationNodeStateMachineTransition_l472u"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_5ki23"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_21ih3"), "attack", "Idle", SubResource("AnimationNodeStateMachineTransition_6bqa5"), "walk", "Idle", SubResource("AnimationNodeStateMachineTransition_siaah"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_qlbh4"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_3wi1v"), "Idle", "death", SubResource("AnimationNodeStateMachineTransition_4evup")]
 
 [node name="pawn" type="CharacterBody2D"]
 texture_filter = 1
@@ -151,10 +199,19 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_qlam2")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/IsAttacking = false
+parameters/conditions/dead = false
 parameters/conditions/isAttacking = false
 parameters/conditions/isNotAttacking = false
 parameters/conditions/notWalk = true
 parameters/conditions/walk = false
+
+[node name="death" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(-2, 2)
+texture = ExtResource("3_uyk8f")
+hframes = 7
+vframes = 2
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

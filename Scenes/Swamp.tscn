@@ -1,6 +1,7 @@
-[gd_scene load_steps=44 format=4 uid="uid://tx73nwrpl318"]
+[gd_scene load_steps=53 format=4 uid="uid://b2c178wpt7jm0"]
 
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_quw3r"]
+[ext_resource type="Script" path="res://Scenes/swamp.gd" id="1_qy1fv"]
 [ext_resource type="Texture2D" uid="uid://de5ihahdr6u0t" path="res://Assets/Flowers/crimson-daisy.png" id="2_0vybs"]
 [ext_resource type="Texture2D" uid="uid://fj12we7dlnmn" path="res://Assets/TileSets/swamp_trees01.png" id="2_kbdp2"]
 [ext_resource type="Texture2D" uid="uid://dq45fw577pdoq" path="res://Assets/Flowers/bubblebush-blossoms.png" id="3_3k6pg"]
@@ -16,6 +17,10 @@
 [ext_resource type="Texture2D" uid="uid://6v88377tpumh" path="res://Assets/TileSets/swamp_tileset2.png" id="10_hao2c"]
 [ext_resource type="PackedScene" uid="uid://cdo40f4qphovy" path="res://Player.tscn" id="10_hkwcm"]
 [ext_resource type="Texture2D" uid="uid://cthncbxw8kxsa" path="res://Assets/TileSets/swamp_tileset3.png" id="11_2n6uq"]
+[ext_resource type="Script" path="res://Scenes/brain.gd" id="18_aitkh"]
+[ext_resource type="Texture2D" uid="uid://bu8htxlxdp4p8" path="res://Assets/Flowers/looking-grass.png" id="19_2506d"]
+[ext_resource type="Script" path="res://Scenes/grass.gd" id="20_oeoys"]
+[ext_resource type="Script" path="res://Scenes/rootbulb.gd" id="21_44bxc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4xjdx"]
 texture = ExtResource("1_quw3r")
@@ -1719,7 +1724,20 @@ size = Vector2(2272.94, 66.9608)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v1ekk"]
 size = Vector2(111.125, 547.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kr6py"]
+size = Vector2(396, 121)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uc3j3"]
+radius = 26.0021
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pgjpy"]
+radius = 36.0284
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jhask"]
+radius = 52.3356
+
 [node name="Swamp" type="Node2D"]
+script = ExtResource("1_qy1fv")
 
 [node name="Herb" type="TileMapLayer" parent="."]
 visibility_layer = 7
@@ -1795,3 +1813,54 @@ shape = SubResource("RectangleShape2D_fchga")
 [node name="CollisionShape2D9" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(457.438, -1065)
 shape = SubResource("RectangleShape2D_v1ekk")
+
+[node name="exit" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit"]
+position = Vector2(636, -1047)
+shape = SubResource("RectangleShape2D_kr6py")
+
+[node name="brain" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1571.5, -321.75)
+scale = Vector2(3.75, 3.75)
+texture = ExtResource("5_rgwi2")
+script = ExtResource("18_aitkh")
+
+[node name="Area2D" type="Area2D" parent="brain"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="brain/Area2D"]
+shape = SubResource("CircleShape2D_uc3j3")
+
+[node name="grass" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1704, 647)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("19_2506d")
+script = ExtResource("20_oeoys")
+
+[node name="Area2D" type="Area2D" parent="grass"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="grass/Area2D"]
+shape = SubResource("CircleShape2D_pgjpy")
+
+[node name="rootbulb" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-462, 1335)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("4_2kead")
+script = ExtResource("21_44bxc")
+
+[node name="Area2D" type="Area2D" parent="rootbulb"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rootbulb/Area2D"]
+texture_filter = 1
+shape = SubResource("CircleShape2D_jhask")
+
+[connection signal="body_entered" from="exit" to="." method="_on_exit_body_entered"]
+[connection signal="body_entered" from="brain/Area2D" to="brain" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="brain/Area2D" to="brain" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="grass/Area2D" to="grass" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="grass/Area2D" to="grass" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="rootbulb/Area2D" to="rootbulb" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="rootbulb/Area2D" to="rootbulb" method="_on_area_2d_body_exited"]

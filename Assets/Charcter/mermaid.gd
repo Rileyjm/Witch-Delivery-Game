@@ -16,7 +16,8 @@ func _process(delta: float) -> void:
 			run_dialogue("mD")
 		if Input.is_action_just_pressed("talk") && Global.mDia == 3:
 			run_dialogue("mP")
-
+			Global.score = Global.score +20
+	Global.mDiaCheck()
 
 func run_dialogue(dialogue_string):
 	Dialogic.start(dialogue_string)

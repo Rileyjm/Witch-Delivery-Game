@@ -35,13 +35,21 @@ directories/dtl_directory={
 "VampP": "res://addons/dialogic/VampP.dtl",
 "Vampire": "res://addons/dialogic/Vampire.dtl",
 "bloodroot": "res://addons/dialogic/bloodroot.dtl",
+"brain": "res://addons/dialogic/brain.dtl",
+"bubble": "res://addons/dialogic/bubble.dtl",
 "cloudberries": "res://addons/dialogic/cloudberries.dtl",
+"crimson": "res://addons/dialogic/crimson.dtl",
 "fairy": "res://addons/dialogic/fairy.dtl",
 "fairyD": "res://addons/dialogic/fairyD.dtl",
 "fairyP": "res://addons/dialogic/fairyP.dtl",
+"feather": "res://addons/dialogic/feather.dtl",
+"grass": "res://addons/dialogic/grass.dtl",
+"light": "res://addons/dialogic/light.dtl",
 "m": "res://addons/dialogic/m.dtl",
 "mD": "res://addons/dialogic/mD.dtl",
-"mP": "res://addons/dialogic/mP.dtl"
+"mP": "res://addons/dialogic/mP.dtl",
+"rootbulb": "res://addons/dialogic/rootbulb.dtl",
+"snow": "res://addons/dialogic/snow.dtl"
 }
 glossary/default_case_sensitive=true
 layout/style_list=["res://addons/dialogic/New_File.tres"]
@@ -123,5 +131,10 @@ talk={
 pause={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+attack={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(210, 20),"global_position":Vector2(219, 66),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }

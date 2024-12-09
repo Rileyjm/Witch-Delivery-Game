@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://c8xo03je4gobn"]
+[gd_scene load_steps=49 format=4 uid="uid://c8xo03je4gobn"]
 
 [ext_resource type="Texture2D" uid="uid://cn81xkisees4m" path="res://Assets/TileSets/TileSet_V1.png" id="1_catf3"]
 [ext_resource type="Texture2D" uid="uid://cqw6rgnk12wdx" path="res://Assets/TileSets/all.png" id="1_ewsce"]
@@ -1668,6 +1668,9 @@ size = Vector2(80, 318)
 [sub_resource type="CircleShape2D" id="CircleShape2D_so44u"]
 radius = 63.6201
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kkqra"]
+size = Vector2(299, 227)
+
 [node name="MainArea" type="Node2D"]
 script = ExtResource("1_jlfal")
 
@@ -1833,10 +1836,6 @@ scale = Vector2(1.2, 1.2)
 tile_map_data = PackedByteArray("AAC9/xEAAAACAAwAAAC9//T/AAACAAwAAADY/8v/AAACAAwAAAC6/8z/AAACAAwAAADo/8v/AAACAAwAAADK/8//AAACAAwAAAC7/9r/AAACAAwAAAC7/wQAAAACAAwAAADH/+n/AAAOAAwAAADQ/9P/AAAOAAwAAADt/9P/AAAOAAwAAADD/9X/AAAOAAwAAAC6/x8AAAAOAAwAAADG/zgAAAAOAAwAAADH/2EAAAAOAAwAAADG/3EAAAAOAAwAAADu/3AAAAAOAAwAAADZ/3IAAAAOAAwAAAAMAG8AAAAOAAwAAAAuAHEAAAAOAAwAAABNAHEAAAAOAAwAAABiAHAAAAAOAAwAAAB7AG0AAAAOAAwAAACBAFsAAAAOAAwAAACCAGgAAAAOAAwAAAB/ADMAAAAOAAwAAAB9ABkAAAAOAAwAAACrABUAAAAOAAwAAACVAA0AAAAOAAwAAACgACcAAAAOAAwAAAB+AAkAAAAOAAwAAAB7APr/AAAOAAwAAAB5ANn/AAAOAAwAAACAAOn/AAAOAAwAAACcAPH/AAAOAAwAAACdAPH/AAAOAAwAAACeAPH/AAAOAAwAAACfAPH/AAAOAAwAAAB7APD/AAAaAAAAAAB+AOH/AAAaAAAAAACGAP7/AAAaAAAAAACDAPH/AAAaAAAAAACDABEAAAAaAAAAAACAAAAAAAAaAAAAAAB/ACgAAAAaAAAAAACDACAAAAAaAAAAAAB/AEMAAAAaAAAAAABwAHIAAAAaAAAAAABpAG4AAAAaAAAAAABWAGwAAAAaAAAAAAA8AHMAAAAaAAAAAAAWAGsAAAAaAAAAAADN/2wAAAAaAAAAAADF/08AAAAaAAAAAADC/0QAAAAaAAAAAADG/yMAAAAaAAAAAADI/xQAAAAaAAAAAADA/wQAAAAaAAAAAADI//j/AAAaAAAAAADa/9P/AAAaAAAAAADI/9r/AAAaAAAAAADC/+L/AAACAAAAAADF//H/AAACAAAAAADI/wYAAAACAAAAAADF////AAACAAAAAADC/wsAAAACAAAAAADF/ysAAAACAAAAAADA/xkAAAACAAAAAAC9/ycAAAACAAAAAAC9/ygAAAACAAAAAADF/1kAAAACAAAAAAC4/zUAAAACAAAAAAC1/yoAAAACAAAAAADg/3QAAAACAAAAAADN/3MAAAACAAAAAADB/2cAAAACAAAAAAD2/3QAAAACAAAAAAAHAHMAAAACAAAAAADm/3MAAAACAAAAAAAbAHQAAAACAAAAAAA3AHMAAAACAAAAAABFAHMAAAACAAAAAABaAHIAAAAmAAAAAAB3AHQAAAAmAAAAAACCAHEAAAAmAAAAAACCAHAAAAAmAAAAAACFAGAAAAAmAAAAAACJAGwAAAAmAAAAAAB/AGAAAAAaAAAAAAB8ACAAAAAmAAAAAAB7ABAAAAAmAAAAAAB7AOf/AAAmAAAAAAB7AN7/AAAmAAAAAACTAN7/AAAmAAAAAACHANf/AAAmAAAAAACNAPj/AAAmAAAAAACLABcAAAAmAAAAAACNAOP/AAAmAAAAAACNADAAAAACAAwAAACLACUAAAACAAwAAABTAHQAAAACAAwAAAAqAHUAAAACAAwAAADW/3cAAAACAAwAAADv/4IAAAACAAwAAADA/3EAAAACAAwAAADH/2kAAAACAAwAAAC//14AAAACAAwAAAC2/08AAAACAAwAAAC+/zwAAAACAAwAAAA=")
 tile_set = SubResource("TileSet_8eph7")
 
-[node name="pawn" parent="tiles" node_paths=PackedStringArray("play") instance=ExtResource("10_nl3j3")]
-position = Vector2(238, 379)
-play = NodePath("../../Player")
-
 [node name="NPCs" type="Node2D" parent="."]
 
 [node name="Goblin" parent="NPCs" instance=ExtResource("12_4mlwd")]
@@ -1896,6 +1895,16 @@ z_index = 3
 position = Vector2(-462.8, -620)
 scale = Vector2(1.3, 1.3)
 
+[node name="SwampPath" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwampPath"]
+position = Vector2(683, 2241)
+shape = SubResource("RectangleShape2D_kkqra")
+
+[node name="pawn" parent="." node_paths=PackedStringArray("play") instance=ExtResource("10_nl3j3")]
+position = Vector2(238, 379)
+play = NodePath("../Player")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="forestPath" to="." method="_on_forest_path_body_entered"]
 [connection signal="body_entered" from="NPCs/Goblin/chatDetGob" to="NPCs/Goblin" method="_on_chat_det_gob_body_entered"]
@@ -1907,3 +1916,4 @@ scale = Vector2(1.3, 1.3)
 [connection signal="body_entered" from="lakePath" to="." method="_on_lake_path_body_entered"]
 [connection signal="body_entered" from="Mermaid/mTalk" to="Mermaid" method="_on_m_talk_body_entered"]
 [connection signal="body_exited" from="Mermaid/mTalk" to="Mermaid" method="_on_m_talk_body_exited"]
+[connection signal="body_entered" from="SwampPath" to="." method="_on_swamp_path_body_entered"]
