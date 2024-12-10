@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://b2c178wpt7jm0"]
+[gd_scene load_steps=64 format=4 uid="uid://b2c178wpt7jm0"]
 
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_quw3r"]
 [ext_resource type="Script" path="res://Scenes/swamp.gd" id="1_qy1fv"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://7v4mukra2mip" path="res://bg_music.tscn" id="19_5vbyc"]
 [ext_resource type="Script" path="res://Scenes/rootbulb.gd" id="21_44bxc"]
 [ext_resource type="Script" path="res://Scenes/bubblebush.gd" id="25_3a4c4"]
+[ext_resource type="PackedScene" uid="uid://btxmhbikyt4jp" path="res://Assets/Charcter/pawn.tscn" id="26_jm3nw"]
 [ext_resource type="Texture2D" uid="uid://da3wsou0g1g7f" path="res://Assets/Flowers/bloodroot.png" id="26_omg6p"]
 [ext_resource type="Script" path="res://Scenes/bloodroot.gd" id="27_w6yj2"]
 
@@ -1740,6 +1741,21 @@ radius = 52.3356
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2vck"]
 size = Vector2(312.664, 101)
 
+[sub_resource type="Animation" id="Animation_jka5u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_4yni8"]
 resource_name = "fog"
 length = 0.8
@@ -1755,21 +1771,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [1, 2, 3, 4, 5, 6, 7, 8]
-}
-
-[sub_resource type="Animation" id="Animation_jka5u"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jr6gl"]
@@ -1966,6 +1967,12 @@ scale = Vector2(0.376812, 0.376812)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bloodroot/Bloodroot"]
 position = Vector2(1355, 421)
 shape = SubResource("CircleShape2D_2mo6y")
+
+[node name="pawn" parent="." instance=ExtResource("26_jm3nw")]
+position = Vector2(392, 221)
+
+[node name="pawn2" parent="." instance=ExtResource("26_jm3nw")]
+position = Vector2(992, 949)
 
 [connection signal="body_entered" from="exit" to="." method="_on_exit_body_entered"]
 [connection signal="body_entered" from="brain/Area2D" to="brain" method="_on_area_2d_body_entered"]
