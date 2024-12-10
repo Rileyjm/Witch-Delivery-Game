@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=4 uid="uid://drogchpd5hw58"]
+[gd_scene load_steps=63 format=4 uid="uid://drogchpd5hw58"]
 
 [ext_resource type="Script" path="res://Scripts/forest.gd" id="1_fyfm2"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_ho3rt"]
@@ -15,15 +15,14 @@
 [ext_resource type="Texture2D" uid="uid://cn81xkisees4m" path="res://Assets/TileSets/TileSet_V1.png" id="12_l2jbw"]
 [ext_resource type="PackedScene" uid="uid://cdo40f4qphovy" path="res://Player.tscn" id="13_oaydb"]
 [ext_resource type="Texture2D" uid="uid://b0gdd8gasjiyn" path="res://Assets/TileSets/Log.png" id="15_p3jb0"]
-[ext_resource type="Texture2D" uid="uid://cnuxqmg4dkf7j" path="res://Assets/Flowers/snowdrop.png" id="15_xw7pl"]
-[ext_resource type="Script" path="res://Scenes/snow_drop.gd" id="16_cflm2"]
 [ext_resource type="Script" path="res://Scripts/log.gd" id="16_qcrmr"]
-[ext_resource type="Texture2D" uid="uid://d2l014m4l6ja5" path="res://Assets/Flowers/light-fruit.png" id="17_4prw1"]
 [ext_resource type="Script" path="res://Scripts/squirrel.gd" id="17_btxia"]
 [ext_resource type="Texture2D" uid="uid://dwuh2tdw2n3dj" path="res://Assets/squirrel_idle.png" id="17_oyjfk"]
-[ext_resource type="Script" path="res://Scenes/light_fruit.gd" id="18_rqb3y"]
 [ext_resource type="Script" path="res://Scenes/chaos.gd" id="19_cqwlx"]
 [ext_resource type="PackedScene" uid="uid://7v4mukra2mip" path="res://bg_music.tscn" id="19_h12mn"]
+[ext_resource type="Texture2D" uid="uid://b4ggti5pp5nco" path="res://Assets/Flowers/blood-lily.png" id="22_1redp"]
+[ext_resource type="Script" path="res://Scenes/bloodlily.gd" id="23_x7s4v"]
+[ext_resource type="Script" path="res://Scenes/cloud_berries.gd" id="25_3ak88"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4xjdx"]
 texture = ExtResource("1_ho3rt")
@@ -1670,11 +1669,6 @@ size = Vector2(170, 144.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nd1bf"]
 size = Vector2(632.5, 91)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_cgyce"]
-radius = 35.2568
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_wp6ui"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_cv8yd"]
 radius = 65.6201
 
@@ -1683,6 +1677,12 @@ size = Vector2(116, 76)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t7sil"]
 size = Vector2(122, 74)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_og6tn"]
+radius = 36.2958
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1ce8b"]
+radius = 65.6201
 
 [node name="Forest" type="Node2D"]
 script = ExtResource("1_fyfm2")
@@ -1792,31 +1792,6 @@ shape = SubResource("RectangleShape2D_4tir0")
 position = Vector2(-472, 2275)
 shape = SubResource("RectangleShape2D_nd1bf")
 
-[node name="SnowDrop" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(306, 801)
-scale = Vector2(3, 3)
-texture = ExtResource("15_xw7pl")
-script = ExtResource("16_cflm2")
-
-[node name="Area2D" type="Area2D" parent="SnowDrop"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SnowDrop/Area2D"]
-shape = SubResource("CircleShape2D_cgyce")
-
-[node name="lightFruit" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(1896, 1869)
-scale = Vector2(3, 3)
-texture = ExtResource("17_4prw1")
-script = ExtResource("18_rqb3y")
-
-[node name="Area2D" type="Area2D" parent="lightFruit"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="lightFruit/Area2D"]
-scale = Vector2(3, 3)
-shape = SubResource("CircleShape2D_wp6ui")
-
 [node name="chaos" type="Sprite2D" parent="."]
 z_index = 1
 texture_filter = 1
@@ -1884,10 +1859,39 @@ max_distance = 20000.0
 attenuation = 7.01097e-05
 panning_strength = 0.0
 
+[node name="CloudBerries" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2101, 536)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("4_ytk7l")
+script = ExtResource("25_3ak88")
+
+[node name="Area2D" type="Area2D" parent="CloudBerries"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CloudBerries/Area2D"]
+shape = SubResource("CircleShape2D_og6tn")
+
+[node name="Bloodlily" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(275, 819)
+scale = Vector2(4.33385, 4.33385)
+texture = ExtResource("22_1redp")
+script = ExtResource("23_x7s4v")
+
+[node name="BloodLily" type="Area2D" parent="Bloodlily"]
+z_index = 2
+position = Vector2(-511.333, -157.13)
+scale = Vector2(0.376812, 0.376812)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bloodlily/BloodLily"]
+position = Vector2(1355, 421)
+shape = SubResource("CircleShape2D_1ce8b")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="SnowDrop/Area2D" to="SnowDrop" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="SnowDrop/Area2D" to="SnowDrop" method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="lightFruit/Area2D" to="lightFruit" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="lightFruit/Area2D" to="lightFruit" method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="chaos/Daisy" to="chaos" method="_on_daisy_body_entered"]
 [connection signal="body_exited" from="chaos/Daisy" to="chaos" method="_on_daisy_body_exited"]
+[connection signal="body_entered" from="CloudBerries/Area2D" to="CloudBerries" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="CloudBerries/Area2D" to="CloudBerries" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Bloodlily/BloodLily" to="Bloodlily" method="_on_blood_lily_body_entered"]
+[connection signal="body_exited" from="Bloodlily/BloodLily" to="Bloodlily" method="_on_blood_lily_body_exited"]
