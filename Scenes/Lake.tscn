@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://cji4lnqwsi2j1"]
+[gd_scene load_steps=63 format=4 uid="uid://cji4lnqwsi2j1"]
 
 [ext_resource type="Script" path="res://Scripts/lake.gd" id="1_gjw3p"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_wxirp"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" path="res://Scenes/grass.gd" id="24_p25fp"]
 [ext_resource type="Texture2D" uid="uid://de5ihahdr6u0t" path="res://Assets/Flowers/crimson-daisy.png" id="25_3x630"]
 [ext_resource type="Script" path="res://Scenes/daisy.gd" id="26_0nr7n"]
+[ext_resource type="PackedScene" uid="uid://btxmhbikyt4jp" path="res://Assets/Charcter/pawn.tscn" id="27_ld5qg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4xjdx"]
 texture = ExtResource("1_wxirp")
@@ -1779,6 +1780,21 @@ radius = 47.1699
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nsi22"]
 size = Vector2(168, 95)
 
+[sub_resource type="Animation" id="Animation_0u0g4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_8w4lk"]
 resource_name = "flap"
 length = 0.3
@@ -1794,21 +1810,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [1, 2, 3]
-}
-
-[sub_resource type="Animation" id="Animation_0u0g4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vwfdf"]
@@ -2041,6 +2042,15 @@ scale = Vector2(0.376812, 0.376812)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Daisy/Daisy"]
 position = Vector2(1355, 421)
 shape = SubResource("CircleShape2D_lf0hl")
+
+[node name="pawn" parent="." instance=ExtResource("27_ld5qg")]
+position = Vector2(-575, 777)
+
+[node name="pawn2" parent="." instance=ExtResource("27_ld5qg")]
+position = Vector2(1751, -155)
+
+[node name="pawn3" parent="." instance=ExtResource("27_ld5qg")]
+position = Vector2(1727, 1295)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="featherleaf/Area2D" to="featherleaf" method="_on_area_2d_body_entered"]

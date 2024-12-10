@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://drogchpd5hw58"]
+[gd_scene load_steps=64 format=4 uid="uid://drogchpd5hw58"]
 
 [ext_resource type="Script" path="res://Scripts/forest.gd" id="1_fyfm2"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_ho3rt"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://7v4mukra2mip" path="res://bg_music.tscn" id="19_h12mn"]
 [ext_resource type="Texture2D" uid="uid://b4ggti5pp5nco" path="res://Assets/Flowers/blood-lily.png" id="22_1redp"]
 [ext_resource type="Script" path="res://Scenes/bloodlily.gd" id="23_x7s4v"]
+[ext_resource type="PackedScene" uid="uid://btxmhbikyt4jp" path="res://Assets/Charcter/pawn.tscn" id="24_1o74v"]
 [ext_resource type="Script" path="res://Scenes/cloud_berries.gd" id="25_3ak88"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4xjdx"]
@@ -1887,6 +1888,15 @@ scale = Vector2(0.376812, 0.376812)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bloodlily/BloodLily"]
 position = Vector2(1355, 421)
 shape = SubResource("CircleShape2D_1ce8b")
+
+[node name="pawn" parent="." instance=ExtResource("24_1o74v")]
+position = Vector2(-409, 821)
+
+[node name="pawn2" parent="." instance=ExtResource("24_1o74v")]
+position = Vector2(1903, 1843)
+
+[node name="pawn3" parent="." instance=ExtResource("24_1o74v")]
+position = Vector2(215, -600)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="chaos/Daisy" to="chaos" method="_on_daisy_body_entered"]
