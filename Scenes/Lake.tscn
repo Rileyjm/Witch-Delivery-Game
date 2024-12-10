@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://cji4lnqwsi2j1"]
+[gd_scene load_steps=62 format=4 uid="uid://cji4lnqwsi2j1"]
 
 [ext_resource type="Script" path="res://Scripts/lake.gd" id="1_gjw3p"]
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_wxirp"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://dw43d1x37jb1j" path="res://Assets/Flowers/featherleaf-branch.png" id="12_seudq"]
 [ext_resource type="PackedScene" uid="uid://cdo40f4qphovy" path="res://Player.tscn" id="13_724p7"]
 [ext_resource type="Script" path="res://Scenes/featherleaf.gd" id="13_m0dpy"]
-[ext_resource type="Script" path="res://Scenes/cloud_berries.gd" id="14_6pkva"]
 [ext_resource type="Texture2D" uid="uid://dq45fw577pdoq" path="res://Assets/Flowers/bubblebush-blossoms.png" id="15_24isc"]
 [ext_resource type="Script" path="res://Scripts/swarm.gd" id="15_pgjbb"]
 [ext_resource type="Script" path="res://Scenes/bubblebush.gd" id="16_8xb7g"]
@@ -24,6 +23,9 @@
 [ext_resource type="Script" path="res://Scenes/tall_grass.gd" id="17_y0v0c"]
 [ext_resource type="Texture2D" uid="uid://d30o0e6a6vcse" path="res://Assets/tall_grass.png" id="18_2akbl"]
 [ext_resource type="PackedScene" uid="uid://7v4mukra2mip" path="res://bg_music.tscn" id="19_ywhjw"]
+[ext_resource type="Script" path="res://Scenes/grass.gd" id="24_p25fp"]
+[ext_resource type="Texture2D" uid="uid://de5ihahdr6u0t" path="res://Assets/Flowers/crimson-daisy.png" id="25_3x630"]
+[ext_resource type="Script" path="res://Scenes/daisy.gd" id="26_0nr7n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4xjdx"]
 texture = ExtResource("1_wxirp")
@@ -1771,17 +1773,58 @@ size = Vector2(65, 379)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ygwep"]
 radius = 48.3333
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_l3qfo"]
-radius = 36.2958
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_21han"]
 radius = 47.1699
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nsi22"]
 size = Vector2(168, 95)
 
+[sub_resource type="Animation" id="Animation_8w4lk"]
+resource_name = "flap"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_0u0g4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vwfdf"]
+_data = {
+"RESET": SubResource("Animation_0u0g4"),
+"flap": SubResource("Animation_8w4lk")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhnnn"]
-size = Vector2(251, 158.25)
+size = Vector2(381, 275.25)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vexkn"]
+radius = 36.0284
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lf0hl"]
+radius = 65.6201
 
 [node name="Lake" type="Node2D"]
 script = ExtResource("1_gjw3p")
@@ -1878,18 +1921,6 @@ script = ExtResource("13_m0dpy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="featherleaf/Area2D"]
 shape = SubResource("CircleShape2D_ygwep")
 
-[node name="CloudBerries" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(2090, 293)
-scale = Vector2(3.5, 3.5)
-texture = ExtResource("4_1hs55")
-script = ExtResource("14_6pkva")
-
-[node name="Area2D" type="Area2D" parent="CloudBerries"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CloudBerries/Area2D"]
-shape = SubResource("CircleShape2D_l3qfo")
-
 [node name="bubblebush" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-649, 334)
@@ -1913,13 +1944,36 @@ position = Vector2(337.5, 1730.75)
 shape = SubResource("RectangleShape2D_nsi22")
 
 [node name="Swarm" type="Sprite2D" parent="Swarm"]
+z_index = 2
 texture_filter = 1
-position = Vector2(297.308, 1667.21)
+position = Vector2(488, 1816)
 rotation = -6.28319
 scale = Vector2(2.66228, 2.81843)
 texture = ExtResource("16_ip5qy")
-hframes = 2
-vframes = 2
+hframes = 7
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Swarm/Swarm"]
+libraries = {
+"": SubResource("AnimationLibrary_vwfdf")
+}
+speed_scale = 0.8
+
+[node name="Swarm2" type="Sprite2D" parent="Swarm"]
+z_index = 2
+texture_filter = 1
+position = Vector2(486, 1704)
+rotation = -6.28319
+scale = Vector2(2.66228, 2.81843)
+texture = ExtResource("16_ip5qy")
+hframes = 7
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Swarm/Swarm2"]
+libraries = {
+"": SubResource("AnimationLibrary_vwfdf")
+}
+speed_scale = 0.8
 
 [node name="SwarmArea" type="Area2D" parent="."]
 
@@ -1928,13 +1982,14 @@ position = Vector2(349.25, 1737.5)
 shape = SubResource("RectangleShape2D_lhnnn")
 
 [node name="TallGrass" type="RigidBody2D" parent="." node_paths=PackedStringArray("area")]
+position = Vector2(-13, 289)
 mass = 0.001
 gravity_scale = 0.0
 script = ExtResource("17_y0v0c")
 area = NodePath("../TallGrassArea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TallGrass"]
-position = Vector2(292, -258.5)
+position = Vector2(292, -259)
 shape = SubResource("RectangleShape2D_nsi22")
 
 [node name="TallGrass" type="Sprite2D" parent="TallGrass"]
@@ -1948,7 +2003,7 @@ texture = ExtResource("18_2akbl")
 [node name="TallGrassArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TallGrassArea"]
-position = Vector2(293.5, -244.125)
+position = Vector2(327, -116)
 shape = SubResource("RectangleShape2D_lhnnn")
 
 [node name="AudioStreamPlayer2D" parent="." instance=ExtResource("19_ywhjw")]
@@ -1958,10 +2013,41 @@ max_distance = 20000.0
 attenuation = 7.01097e-05
 panning_strength = 0.0
 
+[node name="grass" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(330, -163)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("9_0lwv4")
+script = ExtResource("24_p25fp")
+
+[node name="Area2D" type="Area2D" parent="grass"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="grass/Area2D"]
+shape = SubResource("CircleShape2D_vexkn")
+
+[node name="Daisy" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(321, 1775)
+scale = Vector2(4.33385, 4.33385)
+texture = ExtResource("25_3x630")
+script = ExtResource("26_0nr7n")
+
+[node name="Daisy" type="Area2D" parent="Daisy"]
+z_index = 2
+position = Vector2(-511.333, -157.13)
+scale = Vector2(0.376812, 0.376812)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Daisy/Daisy"]
+position = Vector2(1355, 421)
+shape = SubResource("CircleShape2D_lf0hl")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="featherleaf/Area2D" to="featherleaf" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="featherleaf/Area2D" to="featherleaf" method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="CloudBerries/Area2D" to="CloudBerries" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="CloudBerries/Area2D" to="CloudBerries" method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="bubblebush/Area2D" to="bubblebush" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="bubblebush/Area2D" to="bubblebush" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="grass/Area2D" to="grass" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="grass/Area2D" to="grass" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Daisy/Daisy" to="Daisy" method="_on_daisy_body_entered"]
+[connection signal="body_exited" from="Daisy/Daisy" to="Daisy" method="_on_daisy_body_exited"]

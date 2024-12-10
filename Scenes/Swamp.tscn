@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=4 uid="uid://b2c178wpt7jm0"]
+[gd_scene load_steps=63 format=4 uid="uid://b2c178wpt7jm0"]
 
 [ext_resource type="Texture2D" uid="uid://drm4cbd7ekn74" path="res://Assets/TileSets/bush.png" id="1_quw3r"]
 [ext_resource type="Script" path="res://Scenes/swamp.gd" id="1_qy1fv"]
@@ -21,9 +21,10 @@
 [ext_resource type="Script" path="res://Scenes/brain.gd" id="18_aitkh"]
 [ext_resource type="Texture2D" uid="uid://cvg60hhn43qin" path="res://Scripts/smoke..png" id="18_f6o6q"]
 [ext_resource type="PackedScene" uid="uid://7v4mukra2mip" path="res://bg_music.tscn" id="19_5vbyc"]
-[ext_resource type="Texture2D" uid="uid://bu8htxlxdp4p8" path="res://Assets/Flowers/looking-grass.png" id="19_2506d"]
-[ext_resource type="Script" path="res://Scenes/grass.gd" id="20_oeoys"]
 [ext_resource type="Script" path="res://Scenes/rootbulb.gd" id="21_44bxc"]
+[ext_resource type="Script" path="res://Scenes/bubblebush.gd" id="25_3a4c4"]
+[ext_resource type="Texture2D" uid="uid://da3wsou0g1g7f" path="res://Assets/Flowers/bloodroot.png" id="26_omg6p"]
+[ext_resource type="Script" path="res://Scenes/bloodroot.gd" id="27_w6yj2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4xjdx"]
 texture = ExtResource("1_quw3r")
@@ -1733,19 +1734,61 @@ size = Vector2(396, 121)
 [sub_resource type="CircleShape2D" id="CircleShape2D_uc3j3"]
 radius = 26.0021
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pgjpy"]
-radius = 36.0284
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_jhask"]
 radius = 52.3356
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2vck"]
-size = Vector2(112, 101)
+size = Vector2(312.664, 101)
+
+[sub_resource type="Animation" id="Animation_4yni8"]
+resource_name = "fog"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_jka5u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jr6gl"]
+_data = {
+"RESET": SubResource("Animation_jka5u"),
+"fog": SubResource("Animation_4yni8")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mq1of"]
 size = Vector2(126, 113)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3mj7s"]
+radius = 47.1699
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2mo6y"]
+radius = 65.6201
+
 [node name="Swamp" type="Node2D"]
+position = Vector2(42, -105)
 script = ExtResource("1_qy1fv")
 
 [node name="Herb" type="TileMapLayer" parent="."]
@@ -1831,7 +1874,7 @@ shape = SubResource("RectangleShape2D_kr6py")
 
 [node name="brain" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(1571.5, -321.75)
+position = Vector2(770, 1665)
 scale = Vector2(3.75, 3.75)
 texture = ExtResource("5_rgwi2")
 script = ExtResource("18_aitkh")
@@ -1840,18 +1883,6 @@ script = ExtResource("18_aitkh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="brain/Area2D"]
 shape = SubResource("CircleShape2D_uc3j3")
-
-[node name="grass" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(1704, 647)
-scale = Vector2(3.5, 3.5)
-texture = ExtResource("19_2506d")
-script = ExtResource("20_oeoys")
-
-[node name="Area2D" type="Area2D" parent="grass"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="grass/Area2D"]
-shape = SubResource("CircleShape2D_pgjpy")
 
 [node name="rootbulb" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -1867,20 +1898,32 @@ texture_filter = 1
 shape = SubResource("CircleShape2D_jhask")
 
 [node name="Fog" type="RigidBody2D" parent="." node_paths=PackedStringArray("area")]
+position = Vector2(124, -70)
+scale = Vector2(1.01191, 0.977275)
 mass = 0.001
 gravity_scale = 0.0
 script = ExtResource("17_31w1t")
 area = NodePath("../FogArea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fog"]
-position = Vector2(611, 1520.5)
+position = Vector2(619.619, 1512.37)
+scale = Vector2(1.24793, -1.54137)
 shape = SubResource("RectangleShape2D_e2vck")
 
 [node name="Fog" type="Sprite2D" parent="Fog"]
 z_index = 2
+texture_filter = 1
 position = Vector2(615, 1520)
-scale = Vector2(0.0324003, 0.0286067)
+scale = Vector2(0.111459, 0.0984084)
 texture = ExtResource("18_f6o6q")
+hframes = 3
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fog/Fog"]
+libraries = {
+"": SubResource("AnimationLibrary_jr6gl")
+}
+speed_scale = 0.8
 
 [node name="FogArea" type="Area2D" parent="."]
 
@@ -1895,10 +1938,41 @@ max_distance = 20000.0
 attenuation = 7.01097e-05
 panning_strength = 0.0
 
+[node name="bubblebush" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-363, 184)
+scale = Vector2(4, 4)
+texture = ExtResource("3_3k6pg")
+script = ExtResource("25_3a4c4")
+
+[node name="Area2D" type="Area2D" parent="bubblebush"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bubblebush/Area2D"]
+shape = SubResource("CircleShape2D_3mj7s")
+
+[node name="Bloodroot" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+position = Vector2(1700, 648)
+scale = Vector2(2.65385, 2.65385)
+texture = ExtResource("26_omg6p")
+script = ExtResource("27_w6yj2")
+
+[node name="Bloodroot" type="Area2D" parent="Bloodroot"]
+z_index = 2
+position = Vector2(-511.333, -157.13)
+scale = Vector2(0.376812, 0.376812)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bloodroot/Bloodroot"]
+position = Vector2(1355, 421)
+shape = SubResource("CircleShape2D_2mo6y")
+
 [connection signal="body_entered" from="exit" to="." method="_on_exit_body_entered"]
 [connection signal="body_entered" from="brain/Area2D" to="brain" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="brain/Area2D" to="brain" method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="grass/Area2D" to="grass" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="grass/Area2D" to="grass" method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="rootbulb/Area2D" to="rootbulb" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="rootbulb/Area2D" to="rootbulb" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="bubblebush/Area2D" to="bubblebush" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="bubblebush/Area2D" to="bubblebush" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Bloodroot/Bloodroot" to="Bloodroot" method="_on_bloodroot_body_entered"]
+[connection signal="body_exited" from="Bloodroot/Bloodroot" to="Bloodroot" method="_on_bloodroot_body_exited"]
